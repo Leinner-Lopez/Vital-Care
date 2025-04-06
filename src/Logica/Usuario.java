@@ -9,7 +9,7 @@ import Conexion.Conexion;
 
 public class Usuario {
 
-    protected String nombre1;
+    protected static String nombre1;
     protected String nombre2;
     protected String apellido1;
     protected String apellido2;
@@ -176,7 +176,7 @@ public class Usuario {
         }
     }
 
-    public String getNombre1() {
+    public static String getNombre1() {
         return nombre1;
     }
 
@@ -186,6 +186,8 @@ public class Usuario {
 
     public String getCorreo() {
         return correo;
-    }
+    }    
+
+    
     
 }

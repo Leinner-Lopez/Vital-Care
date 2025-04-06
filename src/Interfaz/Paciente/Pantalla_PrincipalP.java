@@ -130,7 +130,7 @@ public class Pantalla_PrincipalP extends javax.swing.JFrame {
     }//GEN-LAST:event_subAgendarCitaActionPerformed
 
     private void subVerCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subVerCitasActionPerformed
-
+        new VerCitas().setVisible(true);
     }//GEN-LAST:event_subVerCitasActionPerformed
 
     public static void main(String args[]) {
