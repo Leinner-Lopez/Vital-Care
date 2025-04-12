@@ -22,6 +22,7 @@ public class VizualizarPacientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         JTPacientes = new javax.swing.JTable();
         BTNEliminar = new javax.swing.JButton();
+        BTNEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -38,12 +39,16 @@ public class VizualizarPacientes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(JTPacientes);
 
+        BTNEliminar.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         BTNEliminar.setText("Eliminar");
         BTNEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNEliminarActionPerformed(evt);
             }
         });
+
+        BTNEditar.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
+        BTNEditar.setText("Editar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -53,13 +58,17 @@ public class VizualizarPacientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(BTNEliminar)
+                .addGap(67, 67, 67)
+                .addComponent(BTNEditar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(157, Short.MAX_VALUE)
-                .addComponent(BTNEliminar)
+                .addContainerGap(151, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNEliminar)
+                    .addComponent(BTNEditar))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
@@ -116,6 +125,7 @@ public class VizualizarPacientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNEditar;
     private javax.swing.JButton BTNEliminar;
     private javax.swing.JTable JTPacientes;
     private javax.swing.JScrollPane jScrollPane1;

@@ -2,13 +2,15 @@ package Interfaz.Administrador;
 
 import Interfaz.IniciarSesion;
 import Logica.Medico;
+import Logica.Paciente;
 import Logica.Usuario;
 import java.util.Date;
 import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
 public class CrearCuentaMedico extends javax.swing.JFrame {
-    Usuario U = new Usuario();
+
+    Usuario U = new Paciente();
     boolean estado = false;
 
     public CrearCuentaMedico() {
@@ -416,59 +418,29 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNResgistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNResgistrarseActionPerformed
-        //El campo nombre esta sin llenar:
-        if (JTnombre_1.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo nombre es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }//El campo apellido esta sin llenar:
-        if (JTapellido_1.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo apellido es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }//El campo numero de Documento esta sin llenar:
-        if (JTNumero_Documento.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo numero de Documento es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }//El campo Direccion esta sin llenar:
-        if (JTNumero_Principal1.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo Direccion es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }//El campo correo electronico o telefono esta sin llenar:
-        if (JTCorreo_Electronico.getText().trim().isEmpty() || JTTelefono.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo Datos de Contacto es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        //Las contraseñas se pasan a String para poder manipularlas
-        char[] ContraChar = JPContraseña.getPassword();
-        String contra = new String(ContraChar).trim();
-        char[] ConfiContraChar = JPConfirmarContraseña.getPassword();
-        String Ccontra = new String(ConfiContraChar).trim();
-        //El campo Contraseña esta sin llenar:
-        if (JTUsuario.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo Usuario es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (contra.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo Contraseña es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }//Las contraseñas estan diferentes:
-        if (!contra.equals(Ccontra)) {
-            JOptionPane.showMessageDialog(null, "Las contraseñas son diferentes", "Error", JOptionPane.ERROR_MESSAGE);
-        }else {
+        String contra = new String(JPContraseña.getPassword());
+        String Ccontra = new String(JPConfirmarContraseña.getPassword());
+        //Verificamos si todos los campos estan completos:
+        if (!JTnombre_1.getText().equals("") && !JTapellido_1.getText().equals("") && !JTNumero_Documento.getText().equals("")
+                && !JTNumero_Principal1.getText().equals("") && !JTCorreo_Electronico.getText().equals("") && !JTUsuario.getText().equals("")
+                && !contra.equals("") && contra.equals(Ccontra)) {
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Estas segur@ de enviar los datos?", "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == JOptionPane.YES_OPTION) {
                 String Bis = "";
                 if (JCBIS.isSelected()) {
                     Bis = "Bis";
                 }
-                if(U.buscarUsuario(Integer.parseInt(JTNumero_Documento.getText()))){
-                    JOptionPane.showMessageDialog(null, "Ya hay un usuario existente", "Error", JOptionPane.ERROR_MESSAGE); 
-                }else{
-                   String Direccion = CrearCuentaMedico.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString(), JTNumero2.getText().trim());
+                if (U.buscarExitenciadeUsuario(Integer.parseInt(JTNumero_Documento.getText()))) {
+                    JOptionPane.showMessageDialog(null, "Ya hay un usuario existente", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    String Direccion = CrearCuentaAdministrador.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
                     Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
-                    Medico M = new Medico(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra,CBEspecialidad.getSelectedItem().toString());
-                    M.registrarMe();
+                    Medico M = new Medico(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra, CBEspecialidad.getSelectedItem().toString());
+                    M.registrar();
                 }
-                
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Llena todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BTNResgistrarseActionPerformed
 
@@ -485,20 +457,29 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BTNmostrarActionPerformed
-    public static String direccion(String a,String b,String c,String d,String e,String f,String g,String h){
+    public static String direccion(String a, String b, String c, String d, String e, String f, String g, String h) {
         StringJoiner direccionJ = new StringJoiner(" ");
         direccionJ.add(a);
         direccionJ.add(b);
-        if (!c.isEmpty()) direccionJ.add(c);
-        if (!d.isEmpty()) direccionJ.add(d);
-        if (!e.isEmpty()) direccionJ.add(e);
+        if (!c.isEmpty()) {
+            direccionJ.add(c);
+        }
+        if (!d.isEmpty()) {
+            direccionJ.add(d);
+        }
+        if (!e.isEmpty()) {
+            direccionJ.add(e);
+        }
         direccionJ.add("#");
         direccionJ.add(f);
-        if (!g.isEmpty()) direccionJ.add(g);
+        if (!g.isEmpty()) {
+            direccionJ.add(g);
+        }
         direccionJ.add("-");
         direccionJ.add(h);
         return direccionJ.toString();
     }
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

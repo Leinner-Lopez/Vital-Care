@@ -6,6 +6,8 @@ import java.util.Date;
 import Conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +23,8 @@ public class Administrador extends Usuario {
         super(nombre1, nombre2, apellido1, apellido2, tipoDocumento, numeroDocumento, fechaNacimiento, correo, telefono, direccion, barrio, usuario, contraseña);
     }
 
-    public void registrarAd() {
+    @Override
+    public void registrar() {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
@@ -149,6 +152,78 @@ public class Administrador extends Usuario {
         return new Object[0][0];
     }
 
+    @Override
+    public Object[][] verCitas(String UsUaRio) {
+        List<Object[]> citas = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stmtCitas = null;
+        PreparedStatement stmtMedico = null;
+        ResultSet rtaCitas = null;
+        ResultSet rtaMedico = null;
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            con = c.conectar();
+            String queryCitas = "SELECT documento_paciente, documento_medico, fecha_hora FROM citas";
+            stmtCitas = con.prepareStatement(queryCitas);
+            rtaCitas = stmtCitas.executeQuery();
+
+            while (rtaCitas.next()) {
+                Object[] datos = new Object[4];
+
+                int docPaciente = rtaCitas.getInt("documento_paciente");
+                int docMedico = rtaCitas.getInt("documento_medico");
+                Timestamp fechaHora = rtaCitas.getTimestamp("fecha_hora");
+
+                datos[0] = docPaciente;
+                datos[3] = formato.format(fechaHora);
+
+                // Buscar datos del médico
+                String queryMedico = "SELECT nombre_1, apellido_1, especialidad FROM medicos WHERE num_documento = ?";
+                stmtMedico = con.prepareStatement(queryMedico);
+                stmtMedico.setInt(1, docMedico);
+                rtaMedico = stmtMedico.executeQuery();
+
+                if (rtaMedico.next()) {
+                    String nombreCompleto = rtaMedico.getString("nombre_1") + " " + rtaMedico.getString("apellido_1");
+                    datos[1] = nombreCompleto;
+                    datos[2] = rtaMedico.getString("especialidad");
+                }
+
+                citas.add(datos);
+
+                // Cerrar recursos internos en cada ciclo
+                if (rtaMedico != null) {
+                    rtaMedico.close();
+                }
+                if (stmtMedico != null) {
+                    stmtMedico.close();
+                }
+            }
+
+            return citas.toArray(new Object[citas.size()][4]);
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (rtaCitas != null) {
+                    rtaCitas.close();
+                }
+                if (stmtCitas != null) {
+                    stmtCitas.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+
+        return new Object[0][0];
+    }
+
     public void eliminarPaciente(int NUMERODocumento) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -204,7 +279,7 @@ public class Administrador extends Usuario {
                     con.close();
                 }
             } catch (SQLException e) {
-                System.out.println("Error: "+e.getMessage());
+                System.out.println("Error: " + e.getMessage());
             }
 
         }

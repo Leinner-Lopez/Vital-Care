@@ -1,10 +1,10 @@
 package Interfaz.Paciente;
-import Interfaz.Administrador.*;
+import Logica.Paciente;
 import Logica.Usuario;
 
 public class Pantalla_PrincipalP extends javax.swing.JFrame {
 
-    Usuario u = new Usuario();
+    Usuario u = new Paciente();
 
     public Pantalla_PrincipalP() {
         initComponents();

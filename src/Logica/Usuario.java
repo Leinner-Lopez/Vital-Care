@@ -7,9 +7,9 @@ import java.sql.PreparedStatement;
 import java.util.Date;
 import Conexion.Conexion;
 
-public class Usuario {
+public abstract class Usuario {
 
-    protected static String nombre1;
+    protected String nombre1;
     protected String nombre2;
     protected String apellido1;
     protected String apellido2;
@@ -23,18 +23,6 @@ public class Usuario {
     protected static String usuario;
     protected String contraseña;
     private Conexion c = new Conexion();
-
-    public Usuario(String nombre1, String apellido1, String correo) {
-        this.nombre1 = nombre1;
-        this.apellido1 = apellido1;
-        this.correo = correo;
-    }
-    
-    
-
-    public Usuario(String Usuario) {
-        this.usuario = Usuario;
-    }
 
     public Usuario() {
     }
@@ -55,6 +43,8 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
+    public abstract void registrar();
+    public abstract Object[][] verCitas(String Usuario);
 
     public String verificarDatos(String Usuario, String Contraseña) {
         String[] tablas = {"pacientes", "medicos", "administradores"};
@@ -93,7 +83,7 @@ public class Usuario {
         return "";
     }
     
-    public boolean buscarUsuario(int NumeroDocumento){
+    public boolean buscarExitenciadeUsuario(int NumeroDocumento){
         String[] tablas = {"pacientes", "medicos", "administradores"};
         Connection con = null;
         PreparedStatement stmt = null;
@@ -176,7 +166,7 @@ public class Usuario {
         }
     }
 
-    public static String getNombre1() {
+    public String getNombre1() {
         return nombre1;
     }
 
@@ -186,8 +176,13 @@ public class Usuario {
 
     public String getCorreo() {
         return correo;
-    }    
+    }
 
-    
-    
+    public void setUsuario(String usuario) {
+        Usuario.usuario = usuario;
+    }
+
+    public static String getUsuario() {
+        return usuario;
+    }
 }

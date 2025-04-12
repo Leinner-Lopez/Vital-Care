@@ -1,9 +1,10 @@
 package Interfaz.Administrador;
+import Logica.Administrador;
 import Logica.Usuario;
 
 public class Pantalla_Principal extends javax.swing.JFrame {
 
-    Usuario u = new Usuario();
+    Usuario u = new Administrador();
 
     public Pantalla_Principal() {
         initComponents();
@@ -31,6 +32,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         JMVisualizar = new javax.swing.JMenu();
         subPacientes = new javax.swing.JMenuItem();
         subMedicos = new javax.swing.JMenuItem();
+        subCitas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,6 +133,14 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         });
         JMVisualizar.add(subMedicos);
 
+        subCitas.setText("Citas");
+        subCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subCitasActionPerformed(evt);
+            }
+        });
+        JMVisualizar.add(subCitas);
+
         JMenu.add(JMVisualizar);
 
         jMenu3.setText("jMenu3");
@@ -172,6 +182,10 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         new VizualizarMedicos().setVisible(true);
     }//GEN-LAST:event_subMedicosActionPerformed
 
+    private void subCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subCitasActionPerformed
+        new VizualizarCitas().setVisible(true);
+    }//GEN-LAST:event_subCitasActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -212,6 +226,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem subCitas;
     private javax.swing.JMenuItem subMedicos;
     private javax.swing.JMenuItem subPacientes;
     private javax.swing.JMenuItem subRegistrarAdministrador;

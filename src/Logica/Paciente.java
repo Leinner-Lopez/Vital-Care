@@ -24,8 +24,9 @@ public class Paciente extends Usuario {
         this.seguroMedico = seguroMedico;
     }
 
-    //Registramos a el Usuario en la base de datos 
-    public void registrarPa() {
+    //Registramos a el Paciente en la base de datos 
+    @Override
+    public void registrar() {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
@@ -70,6 +71,7 @@ public class Paciente extends Usuario {
         }
     }
 
+    @Override
     public Object[][] verCitas(String UsUaRio) {
         List<Object[]> citas = new ArrayList<>();
         Connection con = null;
@@ -86,7 +88,7 @@ public class Paciente extends Usuario {
             stmt = con.prepareStatement(query1);
             stmt.setString(1, UsUaRio);
             rta = stmt.executeQuery();
-            int numeroDOCUMENTO = -1;
+            int numeroDOCUMENTO;
             if (rta.next()) {
                 numeroDOCUMENTO = rta.getInt("num_documento");
             }else{

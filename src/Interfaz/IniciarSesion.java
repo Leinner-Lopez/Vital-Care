@@ -1,13 +1,16 @@
 package Interfaz;
+
 import Interfaz.Medico.Pantalla_PrincipalM;
 import Interfaz.Administrador.Pantalla_Principal;
 import Interfaz.Paciente.Pantalla_PrincipalP;
+import Logica.Paciente;
 import Logica.Usuario;
 import javax.swing.JOptionPane;
 
 public class IniciarSesion extends javax.swing.JFrame {
 
     boolean estado = false;
+
     public IniciarSesion() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -30,6 +33,7 @@ public class IniciarSesion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        JTUsuario.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         JTUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTUsuarioActionPerformed(evt);
@@ -42,6 +46,8 @@ public class IniciarSesion extends javax.swing.JFrame {
                 btnIniciar_SesionActionPerformed(evt);
             }
         });
+
+        JPContraseña.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
 
         btnEstadoContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,33 +131,26 @@ public class IniciarSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEstadoContraseñaActionPerformed
 
     private void btnIniciar_SesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar_SesionActionPerformed
-        Usuario U = new Usuario();
-        if (JTUsuario.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo Usuario es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        char[] ContraChar = JPContraseña.getPassword();
-        String contra = new String(ContraChar).trim();
-        if (contra.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo Contraseña es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+        Usuario U = new Paciente();
+        String contra = new String(JPContraseña.getPassword()).trim();
+        if (!JTUsuario.getText().equals("") && !contra.equals("")) {
             String rol = U.verificarDatos(JTUsuario.getText(), contra);
             switch (rol) {
                 case "pacientes":
                     JOptionPane.showMessageDialog(null, "Bienvenido " + JTUsuario.getText(), "Usuario Paciente", JOptionPane.INFORMATION_MESSAGE);
-                    new Usuario(JTUsuario.getText());
+                    U.setUsuario(JTUsuario.getText());
                     new Pantalla_PrincipalP().setVisible(true);
                     this.dispose();
                     break;
                 case "medicos":
                     JOptionPane.showMessageDialog(null, "Bienvenido " + JTUsuario.getText(), "Usuario Medico", JOptionPane.INFORMATION_MESSAGE);
-                    new Usuario(JTUsuario.getText());
+                    U.setUsuario(JTUsuario.getText());
                     new Pantalla_PrincipalM().setVisible(true);
                     this.dispose();
                     break;
                 case "administradores":
                     JOptionPane.showMessageDialog(null, "Bienvenido " + JTUsuario.getText(), "Usuario Administrador", JOptionPane.INFORMATION_MESSAGE);
-                    new Usuario(JTUsuario.getText());
+                    U.setUsuario(JTUsuario.getText());
                     new Pantalla_Principal().setVisible(true);
                     this.dispose();
                     break;
@@ -159,6 +158,8 @@ public class IniciarSesion extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "El usuario no a sido encontrado", "Error", JOptionPane.ERROR_MESSAGE);
                     break;
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Llena todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnIniciar_SesionActionPerformed
 

@@ -1,10 +1,11 @@
 package Interfaz.Medico;
 
+import Logica.Medico;
 import Logica.Usuario;
 
 public class Pantalla_PrincipalM extends javax.swing.JFrame {
 
-    Usuario u = new Usuario();
+    Usuario u = new Medico();
 
     public Pantalla_PrincipalM() {
         initComponents();
@@ -123,12 +124,11 @@ public class Pantalla_PrincipalM extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
+        new VerCitas().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void JMEstablecer_DisponibilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMEstablecer_DisponibilidadActionPerformed
        new Establecer_Disponibilidad().setVisible(true);
-       this.dispose();
     }//GEN-LAST:event_JMEstablecer_DisponibilidadActionPerformed
 
     public static void main(String args[]) {

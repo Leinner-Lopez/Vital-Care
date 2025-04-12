@@ -1,16 +1,15 @@
-package Interfaz.Paciente;
-
-import Logica.Paciente;
+package Interfaz.Medico;
+import Logica.Medico;
 import Logica.Usuario;
 import javax.swing.table.DefaultTableModel;
 
 public class VerCitas extends javax.swing.JFrame {
-    Paciente P = new Paciente();
+    Medico P = new Medico();
 
     public VerCitas() {
         initComponents();
         this.setLocationRelativeTo(null);
-        DefaultTableModel tabla = new DefaultTableModel(P.verCitas(Usuario.getUsuario()), new String[]{"NUMERO DOCUMENTO", "NOMBRE MEDICO", "ESPECIALIDAD", "FECHA CITA"});
+        DefaultTableModel tabla = new DefaultTableModel(P.verCitas(Usuario.getUsuario()), new String[]{"NUMERO DOCUMENTO", "NOMBRE PACIENTE", "SEGURO MEDICO", "FECHA CITA"});
         JTCitas.setModel(tabla);
     }
 
@@ -81,6 +80,7 @@ public class VerCitas extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VerCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
