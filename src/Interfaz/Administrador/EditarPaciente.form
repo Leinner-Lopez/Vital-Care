@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="JTnombre_1" min="-2" pref="131" max="-2" attributes="0"/>
+                                      <Component id="JLnombre_1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="JLnombre_2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="JTnombre_2" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="JTapellido_1" min="-2" pref="132" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="JLapellido_1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="JLapellido_2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="JLDireccion1" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="590" max="-2" attributes="0"/>
+                                          <Component id="JTapellido_2" min="-2" pref="147" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="CBTipo_Via1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                                  <Component id="JTNumero_Principal1" min="-2" pref="37" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                                  <Component id="JCBIS" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="CBLetras1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                                  <Component id="CBOrientacion1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="JLNumeral" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="JLTipo_Documento" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="CBTipo_Documento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="JTNumero_Documento" min="-2" pref="191" max="-2" attributes="0"/>
+                                                      <Component id="JLNumero_Documento" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="JSFecha_Nacimiento" min="-2" max="-2" attributes="0"/>
+                                              <Component id="JLFecha_Nacimiento" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="JTNumero1" min="-2" pref="37" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="CBLetras2" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="JLRaya" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="JTNumero2" min="-2" pref="37" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="JLConfirmarContraseña" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="JPConfirmarContraseña" min="-2" pref="140" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                                  <Component id="BTNmostrar" min="-2" pref="84" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
+                                                  <Component id="JLContraseña" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="JPContraseña" min="-2" pref="140" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="JLUsuario" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="JTUsuario" min="-2" pref="164" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="JLDatosCuenta" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="BTNResgistrarse" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="JLBarrio" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="CBBarrio" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="JLSeguroMedico" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="CBSeguroMedico" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="JLCorreoElectronico" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="JTCorreo_Electronico" min="-2" pref="204" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="JLNumero_Telefono" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="JTTelefono" min="-2" pref="128" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="JLDatosContacto" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="JLDatos_Usuario" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="JLDatos_Usuario" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="JTnombre_1" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="JLnombre_2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="JLnombre_1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="JLapellido_1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="JLapellido_2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="JTnombre_2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="JTapellido_1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="JTapellido_2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="JLTipo_Documento" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="CBTipo_Documento" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="JLFecha_Nacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="JLNumero_Documento" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="JTNumero_Documento" min="-2" max="-2" attributes="0"/>
+                              <Component id="JSFecha_Nacimiento" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="JLDireccion1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="JCBIS" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTNumero2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CBTipo_Via1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JLNumeral" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JLRaya" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTNumero_Principal1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTNumero1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CBOrientacion1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CBLetras1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CBLetras2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="JLBarrio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CBBarrio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JLSeguroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CBSeguroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="JLDatosContacto" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="JLCorreoElectronico" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTCorreo_Electronico" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JLNumero_Telefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                          <Component id="BTNResgistrarse" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="JLDatosCuenta" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="JLUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="JTUsuario" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="JLContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="JPContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="JLConfirmarContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JPConfirmarContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="BTNmostrar" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="JLDatos_Usuario">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="24" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Datos del Usuario"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLnombre_1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Primer Nombre"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTnombre_1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLnombre_2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Segundo Nombre"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTnombre_2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLapellido_1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Primer Apellido"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTapellido_1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLapellido_2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Segundo Apellido"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTapellido_2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLTipo_Documento">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Tipo de Documento"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="CBTipo_Documento">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="7">
+                <StringItem index="0" value="RC"/>
+                <StringItem index="1" value="CC"/>
+                <StringItem index="2" value="TI"/>
+                <StringItem index="3" value="CE"/>
+                <StringItem index="4" value="PAS"/>
+                <StringItem index="5" value="PEP"/>
+                <StringItem index="6" value="PPN"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLNumero_Documento">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Numero de Documento"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTNumero_Documento">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLFecha_Nacimiento">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Fecha de Nacimiento"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="JSFecha_Nacimiento">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="now" stepSize="6" type="date"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="yyyy-MM-dd" type="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLDatosContacto">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="24" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Datos de Contacto"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLNumero_Telefono">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Numero de Telefono"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTCorreo_Electronico">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[15, 30]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLCorreoElectronico">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Correo electronico"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTTelefono">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[15, 30]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLNumeral">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="#"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="CBLetras2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="6">
+                <StringItem index="0" value=" "/>
+                <StringItem index="1" value="A"/>
+                <StringItem index="2" value="B"/>
+                <StringItem index="3" value="C"/>
+                <StringItem index="4" value="D"/>
+                <StringItem index="5" value="E"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="JCBIS">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Bis"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTNumero2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="CBTipo_Via1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value="Calle"/>
+                <StringItem index="1" value="Carrera"/>
+                <StringItem index="2" value="Transversal"/>
+                <StringItem index="3" value="Diagonal"/>
+                <StringItem index="4" value="Avenida"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLBarrio">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Barrio"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTNumero_Principal1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLRaya">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="-"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTNumero1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="CBBarrio">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="118">
+                <StringItem index="0" value="Antonio Nari&#xf1;o"/>
+                <StringItem index="1" value="Balmoral"/>
+                <StringItem index="2" value="Bella Vista"/>
+                <StringItem index="3" value="Bonet"/>
+                <StringItem index="4" value="Bosque Bonnet"/>
+                <StringItem index="5" value="Callej&#xf3;n de Bonet"/>
+                <StringItem index="6" value="Carlos Lleras"/>
+                <StringItem index="7" value="Cedritos"/>
+                <StringItem index="8" value="Ciudad Eben-ezer"/>
+                <StringItem index="9" value="Ciudad Jard&#xed;n"/>
+                <StringItem index="10" value="Ciudadela Comfenalco"/>
+                <StringItem index="11" value="Coburgo"/>
+                <StringItem index="12" value="Comboy"/>
+                <StringItem index="13" value="Conjunto Cerrado San Mart&#xed;n de Los Olivos"/>
+                <StringItem index="14" value="Conjunto Residencial Asoveinte"/>
+                <StringItem index="15" value="Conjunto Residencial Balcones de San Jos&#xe9;"/>
+                <StringItem index="16" value="Conjunto Residencial Villa Rosita"/>
+                <StringItem index="17" value="Diagonal 17"/>
+                <StringItem index="18" value="Eben Ezer"/>
+                <StringItem index="19" value="El Caney"/>
+                <StringItem index="20" value="El Ed&#xe9;n"/>
+                <StringItem index="21" value="El Lucero"/>
+                <StringItem index="22" value="El Manantial"/>
+                <StringItem index="23" value="El Oasis"/>
+                <StringItem index="24" value="El Progreso"/>
+                <StringItem index="25" value="El Rosal"/>
+                <StringItem index="26" value="El Tejar"/>
+                <StringItem index="27" value="Emilio Sierra"/>
+                <StringItem index="28" value="Fontanar"/>
+                <StringItem index="29" value="Fusacat"/>
+                <StringItem index="30" value="Gait&#xe1;n I"/>
+                <StringItem index="31" value="Gait&#xe1;n II"/>
+                <StringItem index="32" value="Gran Colombia"/>
+                <StringItem index="33" value="Independencia"/>
+                <StringItem index="34" value="Jos&#xe9; Antonio Gal&#xe1;n"/>
+                <StringItem index="35" value="La Caba&#xf1;a"/>
+                <StringItem index="36" value="La Esmeralda"/>
+                <StringItem index="37" value="La Florida"/>
+                <StringItem index="38" value="La Independencia"/>
+                <StringItem index="39" value="La Palma"/>
+                <StringItem index="40" value="La Pampa"/>
+                <StringItem index="41" value="La Primavera"/>
+                <StringItem index="42" value="La Venta"/>
+                <StringItem index="43" value="Leidy Di"/>
+                <StringItem index="44" value="Llano Grande"/>
+                <StringItem index="45" value="Llano Largo"/>
+                <StringItem index="46" value="Llano Verde"/>
+                <StringItem index="47" value="Los Andes"/>
+                <StringItem index="48" value="Los Fundadores"/>
+                <StringItem index="49" value="Los Girasoles"/>
+                <StringItem index="50" value="Los Robles"/>
+                <StringItem index="51" value="Los Sauces"/>
+                <StringItem index="52" value="Luxemburgo"/>
+                <StringItem index="53" value="Ma&#xed;z Amarillo"/>
+                <StringItem index="54" value="Mandalay"/>
+                <StringItem index="55" value="Manila"/>
+                <StringItem index="56" value="Marsella"/>
+                <StringItem index="57" value="Mi Tesoro"/>
+                <StringItem index="58" value="Monte Verde"/>
+                <StringItem index="59" value="Nueva Campi&#xf1;a"/>
+                <StringItem index="60" value="Nueva Esperanza"/>
+                <StringItem index="61" value="Nuevo Balmoral"/>
+                <StringItem index="62" value="Olaya"/>
+                <StringItem index="63" value="Parques de Occidente Etapas I y II"/>
+                <StringItem index="64" value="Pek&#xed;n"/>
+                <StringItem index="65" value="Piedra Grande"/>
+                <StringItem index="66" value="Potos&#xed;"/>
+                <StringItem index="67" value="Porvenir La Salle"/>
+                <StringItem index="68" value="Quintas de Balmoral"/>
+                <StringItem index="69" value="San Antonio"/>
+                <StringItem index="70" value="San Diego La Venta"/>
+                <StringItem index="71" value="San Francisco"/>
+                <StringItem index="72" value="San Jorge"/>
+                <StringItem index="73" value="San Mateo"/>
+                <StringItem index="74" value="Santa Ana Campestre"/>
+                <StringItem index="75" value="Santa Anita"/>
+                <StringItem index="76" value="Santa Clara"/>
+                <StringItem index="77" value="Santa Librada"/>
+                <StringItem index="78" value="Santa Mar&#xed;a de Los &#xc1;ngeles"/>
+                <StringItem index="79" value="Santander"/>
+                <StringItem index="80" value="Siboney"/>
+                <StringItem index="81" value="Teresita I"/>
+                <StringItem index="82" value="Teresita II"/>
+                <StringItem index="83" value="Urbanizaci&#xf3;n Altos de Pek&#xed;n"/>
+                <StringItem index="84" value="Urbanizaci&#xf3;n C&#xe1;diz"/>
+                <StringItem index="85" value="Urbanizaci&#xf3;n Cambulos"/>
+                <StringItem index="86" value="Urbanizaci&#xf3;n El Oasis"/>
+                <StringItem index="87" value="Urbanizaci&#xf3;n La Primavera"/>
+                <StringItem index="88" value="Urbanizaci&#xf3;n Las Brisas"/>
+                <StringItem index="89" value="Urbanizaci&#xf3;n Nueva Campi&#xf1;a"/>
+                <StringItem index="90" value="Urbanizaci&#xf3;n Parques de Occidente Etapas I y II"/>
+                <StringItem index="91" value="Urbanizaci&#xf3;n Pedregal de San Luis"/>
+                <StringItem index="92" value="Urbanizaci&#xf3;n Villa Alix"/>
+                <StringItem index="93" value="Urbanizaci&#xf3;n Los Girasoles"/>
+                <StringItem index="94" value="Urbanizaci&#xf3;n San Diego La Venta"/>
+                <StringItem index="95" value="Urbanizaci&#xf3;n Santa Anita"/>
+                <StringItem index="96" value="Urbanizaci&#xf3;n Siboney"/>
+                <StringItem index="97" value="Urbanizaci&#xf3;n Teresita I"/>
+                <StringItem index="98" value="Urbanizaci&#xf3;n Teresita II"/>
+                <StringItem index="99" value="Urbanizaci&#xf3;n Villa Rosita"/>
+                <StringItem index="100" value="Urbanizaci&#xf3;n Villas de San Diego I"/>
+                <StringItem index="101" value="Urbanizaci&#xf3;n Villas de San Diego II"/>
+                <StringItem index="102" value="Urbanizaci&#xf3;n Villas de San Jos&#xe9;"/>
+                <StringItem index="103" value="Urbanizaci&#xf3;n Villas del Rosario"/>
+                <StringItem index="104" value="Urbanizaci&#xf3;n Villa Natalia"/>
+                <StringItem index="105" value="Urbanizaci&#xf3;n Villa Rosal&#xed;a"/>
+                <StringItem index="106" value="Urbanizaci&#xf3;n Villa Sutagaos"/>
+                <StringItem index="107" value="Villa Alix"/>
+                <StringItem index="108" value="Villa Aranzazu"/>
+                <StringItem index="109" value="Villa Armerita"/>
+                <StringItem index="110" value="Villa Celeste"/>
+                <StringItem index="111" value="Villa Country"/>
+                <StringItem index="112" value="Villa de Los Sutagaos"/>
+                <StringItem index="113" value="Villa Natalia"/>
+                <StringItem index="114" value="Villa Rosal&#xed;a"/>
+                <StringItem index="115" value="Villas de San Diego I"/>
+                <StringItem index="116" value="Villas de San Diego II"/>
+                <StringItem index="117" value="Villas de La Pampa"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLDireccion1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Direccion"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="CBOrientacion1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value=" "/>
+                <StringItem index="1" value="Este"/>
+                <StringItem index="2" value="Oeste"/>
+                <StringItem index="3" value="Sur"/>
+                <StringItem index="4" value="Norte"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="BTNResgistrarse">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Actualizar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNResgistrarseActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="CBLetras1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="6">
+                <StringItem index="0" value=" "/>
+                <StringItem index="1" value="A"/>
+                <StringItem index="2" value="B"/>
+                <StringItem index="3" value="C"/>
+                <StringItem index="4" value="D"/>
+                <StringItem index="5" value="E"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLSeguroMedico">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Seguro Medico"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="CBSeguroMedico">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="20">
+                <StringItem index="0" value="Nueva EPS"/>
+                <StringItem index="1" value="Sanitas"/>
+                <StringItem index="2" value="Sura"/>
+                <StringItem index="3" value="Compensar"/>
+                <StringItem index="4" value="Salud Total"/>
+                <StringItem index="5" value="Famisanar"/>
+                <StringItem index="6" value="Aliansalud"/>
+                <StringItem index="7" value="Mutual Ser"/>
+                <StringItem index="8" value="Capital Salud"/>
+                <StringItem index="9" value="Cajacopi"/>
+                <StringItem index="10" value="Coosalud"/>
+                <StringItem index="11" value="Asmet Salud"/>
+                <StringItem index="12" value="Emssanar"/>
+                <StringItem index="13" value="Savia Salud"/>
+                <StringItem index="14" value="Capresoca"/>
+                <StringItem index="15" value="Comfachoc&#xf3;"/>
+                <StringItem index="16" value="Ecoopsos"/>
+                <StringItem index="17" value="Anas Wayuu EPS-I"/>
+                <StringItem index="18" value="Dusakawi EPS-I"/>
+                <StringItem index="19" value="PIJAOS SALUD EPS-I"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLDatosCuenta">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="24" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Datos de la Cuenta"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLUsuario">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Usuario"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="JTUsuario">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="BTNmostrar">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNmostrarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="JPConfirmarContrase&#xf1;a">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[15, 30]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="JPContrase&#xf1;a">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="16" style="0"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[15, 30]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLContrase&#xf1;a">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JLConfirmarContrase&#xf1;a">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Confirmar Contrase&#xf1;a"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

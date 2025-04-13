@@ -32,6 +32,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         JMVisualizar = new javax.swing.JMenu();
         subPacientes = new javax.swing.JMenuItem();
         subMedicos = new javax.swing.JMenuItem();
+        subAdministradores = new javax.swing.JMenuItem();
         subCitas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
@@ -133,6 +134,14 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         });
         JMVisualizar.add(subMedicos);
 
+        subAdministradores.setText("Administradores");
+        subAdministradores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subAdministradoresActionPerformed(evt);
+            }
+        });
+        JMVisualizar.add(subAdministradores);
+
         subCitas.setText("Citas");
         subCitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,6 +195,10 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         new VizualizarCitas().setVisible(true);
     }//GEN-LAST:event_subCitasActionPerformed
 
+    private void subAdministradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subAdministradoresActionPerformed
+        new VizualizarAdministradores().setVisible(true);
+    }//GEN-LAST:event_subAdministradoresActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -226,6 +239,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem subAdministradores;
     private javax.swing.JMenuItem subCitas;
     private javax.swing.JMenuItem subMedicos;
     private javax.swing.JMenuItem subPacientes;

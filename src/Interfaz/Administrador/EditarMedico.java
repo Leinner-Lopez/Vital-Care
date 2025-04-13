@@ -2,24 +2,109 @@ package Interfaz.Administrador;
 
 import Logica.Medico;
 import Logica.Usuario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
-public class CrearCuentaMedico extends javax.swing.JFrame {
+public class EditarMedico extends javax.swing.JFrame {
 
     Usuario U = new Medico();
     boolean estado = false;
+    String medico[];
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
-    public CrearCuentaMedico() {
+    public EditarMedico() {
         initComponents();
-        this.setLocationRelativeTo(this);
-        this.setResizable(false);
-        this.setTitle("Crear Cuenta");
-        BTNmostrar.setText("Mostrar");
-        JPConfirmarContraseña.setEchoChar('•');
-        JPContraseña.setEchoChar('•');
+    }
 
+    public EditarMedico(String[] medico) {
+        try {
+            initComponents();
+            String[] partes = EditarMedico.descomponerDireccion(medico[7]);
+            this.setLocationRelativeTo(this);
+            this.setResizable(false);
+            this.setTitle("Editar Medico");
+            this.medico = medico;
+            BTNmostrar.setText("Mostrar");
+            JPConfirmarContraseña.setEchoChar('•');
+            JPContraseña.setEchoChar('•');
+            JTnombre_1.setText(medico[0]);
+            JTnombre_2.setText(medico[1]);
+            JTapellido_1.setText(medico[2]);
+            JTapellido_2.setText(medico[3]);
+            CBTipo_Documento.setSelectedItem(medico[4]);
+            JTNumero_Documento.setText(medico[5]);
+            Date fechaNacimiento = formato.parse(medico[6]);
+            JSFecha_Nacimiento.setValue(fechaNacimiento);
+            CBTipo_Via1.setSelectedItem(partes[0]);
+            JTNumero_Principal1.setText(partes[1]);
+            CBLetras1.setSelectedItem(partes[3]);
+            CBOrientacion1.setSelectedItem(partes[4]);
+            JTNumero1.setText(partes[5]);
+            CBLetras2.setSelectedItem(partes[6]);
+            JTNumero2.setText(partes[7]);
+            CBBarrio.setSelectedItem(medico[8]);
+            CBEspecialidad.setSelectedItem(medico[9]);
+            JTCorreo_Electronico.setText(medico[10]);
+            JTTelefono.setText(medico[11]);
+            JTUsuario.setText(medico[12]);
+            JPContraseña.setText(medico[13]);
+            JPConfirmarContraseña.setText(medico[13]);
+        } catch (ParseException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+
+    }
+
+    public static String[] descomponerDireccion(String direccion) {
+        // Resultado: [tipoVia, numeroPrincipal, bis, letraPrincipal, orientacion, numeroSecundario, letraSecundaria, numeroFinal]
+        String[] partes = new String[8];
+
+        // Limpiar espacios dobles por si acaso
+        direccion = direccion.trim().replaceAll("\\s+", " ");
+
+        try {
+            // Separar por espacios y símbolos especiales
+            String[] tokens = direccion.split(" ");
+
+            // Tipo de vía (Calle/Carrera/Transversal/etc.)
+            partes[0] = tokens[0]; // Calle, Carrera, etc.
+
+            // Número principal con posible letra (4B)
+            String numPrincipal = tokens[1];
+            partes[1] = numPrincipal.replaceAll("[^\\d]", ""); // 4
+            partes[3] = numPrincipal.replaceAll("\\d", "");    // B (si hay)
+
+            // Bis (opcional)
+            if (tokens[2].equalsIgnoreCase("Bis")) {
+                partes[2] = "Bis";
+            } else {
+                partes[2] = ""; // No hay Bis
+            }
+
+            // Orientación (opcional)
+            if (tokens[2].matches("(?i)(Norte|Sur|Este|Oeste)")) {
+                partes[4] = tokens[2]; // Orientación
+            } else {
+                partes[4] = "";
+            }
+
+            // Separar parte con #
+            String[] despuesDelNumeral = direccion.split("#")[1].split("-");
+
+            String secundaria = despuesDelNumeral[0]; // Ej: 5B
+            partes[5] = secundaria.replaceAll("[^\\d]", ""); // 5
+            partes[6] = secundaria.replaceAll("\\d", "");    // B (si hay)
+
+            partes[7] = despuesDelNumeral.length > 1 ? despuesDelNumeral[1] : ""; // 6
+
+        } catch (Exception e) {
+            System.out.println("Error al descomponer dirección: " + e.getMessage());
+        }
+
+        return partes;
     }
 
     @SuppressWarnings("unchecked")
@@ -106,6 +191,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         JLNumero_Documento.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         JLNumero_Documento.setText("Numero de Documento");
 
+        JTNumero_Documento.setEditable(false);
         JTNumero_Documento.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
 
         JLFecha_Nacimiento.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
@@ -163,7 +249,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         CBOrientacion1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Este", "Oeste", "Sur", "Norte" }));
 
         BTNResgistrarse.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
-        BTNResgistrarse.setText("Registrar");
+        BTNResgistrarse.setText("Actualizar");
         BTNResgistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNResgistrarseActionPerformed(evt);
@@ -428,14 +514,12 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                 if (JCBIS.isSelected()) {
                     Bis = "Bis";
                 }
-                if (U.buscarExitenciadeUsuario(Integer.parseInt(JTNumero_Documento.getText()))) {
-                    JOptionPane.showMessageDialog(null, "Ya hay un usuario existente", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    String Direccion = CrearCuentaAdministrador.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
-                    Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
-                    Medico M = new Medico(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra, CBEspecialidad.getSelectedItem().toString());
-                    M.registrar();
-                }
+                String Direccion = CrearCuentaMedico.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
+                Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
+                Medico M = new Medico(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra, CBEspecialidad.getSelectedItem().toString());
+                M.actualizarDatos();
+                this.dispose();
+                new VizualizarMedicos().setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Llena todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -491,18 +575,18 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrearCuentaMedico().setVisible(true);
+                new EditarMedico().setVisible(true);
             }
         });
     }

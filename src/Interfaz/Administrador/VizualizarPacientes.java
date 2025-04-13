@@ -49,6 +49,11 @@ public class VizualizarPacientes extends javax.swing.JFrame {
 
         BTNEditar.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         BTNEditar.setText("Editar");
+        BTNEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +96,21 @@ public class VizualizarPacientes extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_BTNEliminarActionPerformed
+
+    private void BTNEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNEditarActionPerformed
+        int fila = JTPacientes.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un paciente para editar");
+        } else {
+            int numeroDocumento = Integer.parseInt(JTPacientes.getValueAt(fila, 3).toString());
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea editar al paciente?", "Editar Paciente", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                String [] datos = A.editarPaciente(numeroDocumento);
+                new EditarPaciente(datos).setVisible(true);
+                this.dispose();
+            }
+        }
+    }//GEN-LAST:event_BTNEditarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

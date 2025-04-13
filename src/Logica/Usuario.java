@@ -43,6 +43,7 @@ public abstract class Usuario {
         this.contraseña = contraseña;
     }
 
+    public abstract void actualizarDatos();
     public abstract void registrar();
     public abstract Object[][] verCitas(String Usuario);
 

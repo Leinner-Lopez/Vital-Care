@@ -1,25 +1,60 @@
 package Interfaz.Administrador;
 
-import Logica.Medico;
+import Logica.Administrador;
+import Logica.Paciente;
 import Logica.Usuario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
-public class CrearCuentaMedico extends javax.swing.JFrame {
+public class EditarAdministrador extends javax.swing.JFrame {
 
-    Usuario U = new Medico();
+    String administrador[];
+    Usuario U = new Paciente();
     boolean estado = false;
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
-    public CrearCuentaMedico() {
+    public EditarAdministrador() {
         initComponents();
-        this.setLocationRelativeTo(this);
-        this.setResizable(false);
-        this.setTitle("Crear Cuenta");
-        BTNmostrar.setText("Mostrar");
-        JPConfirmarContraseña.setEchoChar('•');
-        JPContraseña.setEchoChar('•');
+    }
 
+    public EditarAdministrador(String[] administrador) {
+        try {
+            initComponents();
+            String[] partes = EditarPaciente.descomponerDireccion(administrador[7]);
+            this.setLocationRelativeTo(this);
+            this.setResizable(false);
+            this.setTitle("Editar Paciente");
+            this.administrador = administrador;
+            BTNmostrar.setText("Mostrar");
+            JPConfirmarContraseña.setEchoChar('•');
+            JPContraseña.setEchoChar('•');
+            JTnombre_1.setText(administrador[0]);
+            JTnombre_2.setText(administrador[1]);
+            JTapellido_1.setText(administrador[2]);
+            JTapellido_2.setText(administrador[3]);
+            CBTipo_Documento.setSelectedItem(administrador[4]);
+            JTNumero_Documento.setText(administrador[5]);
+            Date fechaNacimiento = formato.parse(administrador[6]);
+            JSFecha_Nacimiento.setValue(fechaNacimiento);
+            CBTipo_Via1.setSelectedItem(partes[0]);
+            JTNumero_Principal1.setText(partes[1]);
+            CBLetras1.setSelectedItem(partes[3]);
+            CBOrientacion1.setSelectedItem(partes[4]);
+            JTNumero1.setText(partes[5]);
+            CBLetras2.setSelectedItem(partes[6]);
+            JTNumero2.setText(partes[7]);
+            CBBarrio.setSelectedItem(administrador[8]);
+            JTCorreo_Electronico.setText(administrador[9]);
+            JTTelefono.setText(administrador[10]);
+            JTUsuario.setText(administrador[11]);
+            JPContraseña.setText(administrador[12]);
+            JPConfirmarContraseña.setText(administrador[12]);
+        } catch (ParseException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -61,8 +96,6 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         CBOrientacion1 = new javax.swing.JComboBox<>();
         BTNResgistrarse = new javax.swing.JButton();
         CBLetras1 = new javax.swing.JComboBox<>();
-        JLSeguroMedico = new javax.swing.JLabel();
-        CBEspecialidad = new javax.swing.JComboBox<>();
         JLDatosCuenta = new javax.swing.JLabel();
         JLUsuario = new javax.swing.JLabel();
         JTUsuario = new javax.swing.JTextField();
@@ -172,12 +205,6 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
 
         CBLetras1.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         CBLetras1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "A", "B", "C", "D", "E" }));
-
-        JLSeguroMedico.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
-        JLSeguroMedico.setText("Especialidad");
-
-        CBEspecialidad.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        CBEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medicina Interna", "Pediatría", "Ginecología y Obstetricia", "Cirugía General", "Anestesiología", "Cardiología", "Neurología", "Traumatología y Ortopedia", "Dermatología", "Oftalmología", "Otorrinolaringología", "Neumología", "Urología", "Endocrinología", "Gastroenterología", "Nefrología", "Psiquiatría", "Oncología", "Reumatología", "Radiología" }));
 
         JLDatosCuenta.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
         JLDatosCuenta.setText("Datos de la Cuenta");
@@ -299,10 +326,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                                 .addComponent(JLBarrio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(CBBarrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(JLSeguroMedico)
-                                .addGap(18, 18, 18)
-                                .addComponent(CBEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(346, 346, 346)))
                         .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,9 +392,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLBarrio)
-                    .addComponent(CBBarrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JLSeguroMedico)
-                    .addComponent(CBEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBBarrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(JLDatosContacto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -428,14 +450,12 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                 if (JCBIS.isSelected()) {
                     Bis = "Bis";
                 }
-                if (U.buscarExitenciadeUsuario(Integer.parseInt(JTNumero_Documento.getText()))) {
-                    JOptionPane.showMessageDialog(null, "Ya hay un usuario existente", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    String Direccion = CrearCuentaAdministrador.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
-                    Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
-                    Medico M = new Medico(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra, CBEspecialidad.getSelectedItem().toString());
-                    M.registrar();
-                }
+                String Direccion = EditarAdministrador.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
+                Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
+                Administrador A = new Administrador(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra);
+                A.actualizarDatos();
+                this.dispose();
+                new VizualizarAdministradores().setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Llena todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -491,18 +511,18 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrearCuentaMedico().setVisible(true);
+                new EditarAdministrador().setVisible(true);
             }
         });
     }
@@ -511,7 +531,6 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
     private javax.swing.JButton BTNResgistrarse;
     private javax.swing.JButton BTNmostrar;
     private javax.swing.JComboBox<String> CBBarrio;
-    private javax.swing.JComboBox<String> CBEspecialidad;
     private javax.swing.JComboBox<String> CBLetras1;
     private javax.swing.JComboBox<String> CBLetras2;
     private javax.swing.JComboBox<String> CBOrientacion1;
@@ -531,7 +550,6 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
     private javax.swing.JLabel JLNumero_Documento;
     private javax.swing.JLabel JLNumero_Telefono;
     private javax.swing.JLabel JLRaya;
-    private javax.swing.JLabel JLSeguroMedico;
     private javax.swing.JLabel JLTipo_Documento;
     private javax.swing.JLabel JLUsuario;
     private javax.swing.JLabel JLapellido_1;

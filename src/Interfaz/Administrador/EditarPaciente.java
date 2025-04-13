@@ -1,25 +1,109 @@
 package Interfaz.Administrador;
 
-import Logica.Medico;
+import Logica.Paciente;
 import Logica.Usuario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
-public class CrearCuentaMedico extends javax.swing.JFrame {
+public class EditarPaciente extends javax.swing.JFrame {
 
-    Usuario U = new Medico();
+    Usuario U = new Paciente();
     boolean estado = false;
+    String[] paciente;
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
-    public CrearCuentaMedico() {
+    public EditarPaciente() {
         initComponents();
-        this.setLocationRelativeTo(this);
-        this.setResizable(false);
-        this.setTitle("Crear Cuenta");
-        BTNmostrar.setText("Mostrar");
-        JPConfirmarContraseña.setEchoChar('•');
-        JPContraseña.setEchoChar('•');
+    }
 
+    public EditarPaciente(String[] paciente) {
+        try {
+            initComponents();
+            String[] partes = EditarPaciente.descomponerDireccion(paciente[7]);
+            this.setLocationRelativeTo(this);
+            this.setResizable(false);
+            this.setTitle("Editar Paciente");
+            this.paciente = paciente;
+            BTNmostrar.setText("Mostrar");
+            JPConfirmarContraseña.setEchoChar('•');
+            JPContraseña.setEchoChar('•');
+            JTnombre_1.setText(paciente[0]);
+            JTnombre_2.setText(paciente[1]);
+            JTapellido_1.setText(paciente[2]);
+            JTapellido_2.setText(paciente[3]);
+            CBTipo_Documento.setSelectedItem(paciente[4]);
+            JTNumero_Documento.setText(paciente[5]);
+            Date fechaNacimiento = formato.parse(paciente[6]);
+            JSFecha_Nacimiento.setValue(fechaNacimiento);
+            CBTipo_Via1.setSelectedItem(partes[0]);
+            JTNumero_Principal1.setText(partes[1]);
+            CBLetras1.setSelectedItem(partes[3]);
+            CBOrientacion1.setSelectedItem(partes[4]);
+            JTNumero1.setText(partes[5]);
+            CBLetras2.setSelectedItem(partes[6]);
+            JTNumero2.setText(partes[7]);
+            CBBarrio.setSelectedItem(paciente[8]);
+            CBSeguroMedico.setSelectedItem(paciente[9]);
+            JTCorreo_Electronico.setText(paciente[10]);
+            JTTelefono.setText(paciente[11]);
+            JTUsuario.setText(paciente[12]);
+            JPContraseña.setText(paciente[13]);
+            JPConfirmarContraseña.setText(paciente[13]);
+        } catch (ParseException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+
+    public static String[] descomponerDireccion(String direccion) {
+        // Resultado: [tipoVia, numeroPrincipal, bis, letraPrincipal, orientacion, numeroSecundario, letraSecundaria, numeroFinal]
+        String[] partes = new String[8];
+
+        // Limpiar espacios dobles por si acaso
+        direccion = direccion.trim().replaceAll("\\s+", " ");
+
+        try {
+            // Separar por espacios y símbolos especiales
+            String[] tokens = direccion.split(" ");
+
+            // Tipo de vía (Calle/Carrera/Transversal/etc.)
+            partes[0] = tokens[0]; // Calle, Carrera, etc.
+
+            // Número principal con posible letra (4B)
+            String numPrincipal = tokens[1];
+            partes[1] = numPrincipal.replaceAll("[^\\d]", ""); // 4
+            partes[3] = numPrincipal.replaceAll("\\d", "");    // B (si hay)
+
+            // Bis (opcional)
+            if (tokens[2].equalsIgnoreCase("Bis")) {
+                partes[2] = "Bis";
+            } else {
+                partes[2] = ""; // No hay Bis
+            }
+
+            // Orientación (opcional)
+            if (tokens[2].matches("(?i)(Norte|Sur|Este|Oeste)")) {
+                partes[4] = tokens[2]; // Orientación
+            } else {
+                partes[4] = "";
+            }
+
+            // Separar parte con #
+            String[] despuesDelNumeral = direccion.split("#")[1].split("-");
+
+            String secundaria = despuesDelNumeral[0]; // Ej: 5B
+            partes[5] = secundaria.replaceAll("[^\\d]", ""); // 5
+            partes[6] = secundaria.replaceAll("\\d", "");    // B (si hay)
+
+            partes[7] = despuesDelNumeral.length > 1 ? despuesDelNumeral[1] : ""; // 6
+
+        } catch (Exception e) {
+            System.out.println("Error al descomponer dirección: " + e.getMessage());
+        }
+
+        return partes;
     }
 
     @SuppressWarnings("unchecked")
@@ -62,7 +146,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         BTNResgistrarse = new javax.swing.JButton();
         CBLetras1 = new javax.swing.JComboBox<>();
         JLSeguroMedico = new javax.swing.JLabel();
-        CBEspecialidad = new javax.swing.JComboBox<>();
+        CBSeguroMedico = new javax.swing.JComboBox<>();
         JLDatosCuenta = new javax.swing.JLabel();
         JLUsuario = new javax.swing.JLabel();
         JTUsuario = new javax.swing.JTextField();
@@ -101,11 +185,12 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         JLTipo_Documento.setText("Tipo de Documento");
 
         CBTipo_Documento.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        CBTipo_Documento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC", "CE", "PAS", "PEP", "PPN" }));
+        CBTipo_Documento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RC", "CC", "TI", "CE", "PAS", "PEP", "PPN" }));
 
         JLNumero_Documento.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         JLNumero_Documento.setText("Numero de Documento");
 
+        JTNumero_Documento.setEditable(false);
         JTNumero_Documento.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
 
         JLFecha_Nacimiento.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
@@ -163,7 +248,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         CBOrientacion1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Este", "Oeste", "Sur", "Norte" }));
 
         BTNResgistrarse.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
-        BTNResgistrarse.setText("Registrar");
+        BTNResgistrarse.setText("Actualizar");
         BTNResgistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNResgistrarseActionPerformed(evt);
@@ -174,10 +259,10 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         CBLetras1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "A", "B", "C", "D", "E" }));
 
         JLSeguroMedico.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
-        JLSeguroMedico.setText("Especialidad");
+        JLSeguroMedico.setText("Seguro Medico");
 
-        CBEspecialidad.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        CBEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medicina Interna", "Pediatría", "Ginecología y Obstetricia", "Cirugía General", "Anestesiología", "Cardiología", "Neurología", "Traumatología y Ortopedia", "Dermatología", "Oftalmología", "Otorrinolaringología", "Neumología", "Urología", "Endocrinología", "Gastroenterología", "Nefrología", "Psiquiatría", "Oncología", "Reumatología", "Radiología" }));
+        CBSeguroMedico.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        CBSeguroMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nueva EPS", "Sanitas", "Sura", "Compensar", "Salud Total", "Famisanar", "Aliansalud", "Mutual Ser", "Capital Salud", "Cajacopi", "Coosalud", "Asmet Salud", "Emssanar", "Savia Salud", "Capresoca", "Comfachocó", "Ecoopsos", "Anas Wayuu EPS-I", "Dusakawi EPS-I", "PIJAOS SALUD EPS-I" }));
 
         JLDatosCuenta.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
         JLDatosCuenta.setText("Datos de la Cuenta");
@@ -302,8 +387,8 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(JLSeguroMedico)
                                 .addGap(18, 18, 18)
-                                .addComponent(CBEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 1, Short.MAX_VALUE))
+                                .addComponent(CBSeguroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -370,7 +455,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                     .addComponent(JLBarrio)
                     .addComponent(CBBarrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JLSeguroMedico)
-                    .addComponent(CBEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBSeguroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(JLDatosContacto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -428,14 +513,12 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                 if (JCBIS.isSelected()) {
                     Bis = "Bis";
                 }
-                if (U.buscarExitenciadeUsuario(Integer.parseInt(JTNumero_Documento.getText()))) {
-                    JOptionPane.showMessageDialog(null, "Ya hay un usuario existente", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    String Direccion = CrearCuentaAdministrador.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
-                    Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
-                    Medico M = new Medico(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra, CBEspecialidad.getSelectedItem().toString());
-                    M.registrar();
-                }
+                String Direccion = EditarPaciente.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
+                Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
+                Paciente P = new Paciente(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), CBSeguroMedico.getSelectedItem().toString(), JTUsuario.getText(), contra);
+                P.actualizarDatos();
+                this.dispose();
+                new VizualizarPacientes().setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Llena todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -455,6 +538,36 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BTNmostrarActionPerformed
+
+    public static void main(String args[]) {
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(EditarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(EditarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(EditarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(EditarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new EditarPaciente().setVisible(true);
+            }
+        });
+    }
+
     public static String direccion(String a, String b, String c, String d, String e, String f, String g, String h) {
         StringJoiner direccionJ = new StringJoiner(" ");
         direccionJ.add(a);
@@ -477,44 +590,14 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         direccionJ.add(h);
         return direccionJ.toString();
     }
-
-    public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearCuentaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CrearCuentaMedico().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNResgistrarse;
     private javax.swing.JButton BTNmostrar;
     private javax.swing.JComboBox<String> CBBarrio;
-    private javax.swing.JComboBox<String> CBEspecialidad;
     private javax.swing.JComboBox<String> CBLetras1;
     private javax.swing.JComboBox<String> CBLetras2;
     private javax.swing.JComboBox<String> CBOrientacion1;
+    private javax.swing.JComboBox<String> CBSeguroMedico;
     private javax.swing.JComboBox<String> CBTipo_Documento;
     private javax.swing.JComboBox<String> CBTipo_Via1;
     private javax.swing.JCheckBox JCBIS;

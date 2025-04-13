@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class Paciente extends Usuario {
 
     private String seguroMedico;
-    private Conexion c = new Conexion();
+    private final Conexion c = new Conexion();
 
     public Paciente() {
     }
@@ -72,6 +72,52 @@ public class Paciente extends Usuario {
     }
 
     @Override
+    public void actualizarDatos() {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = c.conectar();
+            String query = "UPDATE pacientes SET nombre_1 = ?, nombre_2= ?, apellido_1= ?, apellido_2= ?, tipo_documento= ?, fecha_nacimiento= ?, direccion= ?, barrio= ?, seguro_medico= ?, correo_electronico= ?, num_telefono= ?, usuario= ?, contrasena= ? WHERE num_documento = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, nombre1);
+            stmt.setString(2, nombre2);
+            stmt.setString(3, apellido1);
+            stmt.setString(4, apellido2);
+            stmt.setString(5, tipoDocumento);
+            java.sql.Date fechasql = new java.sql.Date(fechaNacimiento.getTime());
+            stmt.setDate(6, fechasql);
+            stmt.setString(7, direccion);
+            stmt.setString(8, barrio);
+            stmt.setString(9, seguroMedico);
+            stmt.setString(10, correo);
+            stmt.setString(11, telefono);
+            stmt.setString(12, usuario);
+            stmt.setString(13, contraseña);
+            stmt.setInt(14, numeroDocumento);
+            int filasinsertadas = stmt.executeUpdate();
+            if (filasinsertadas > 0) {
+                JOptionPane.showMessageDialog(null, "Datos actualizados con exito", "Actualizacion de Datos", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println("Datos no actualizados");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            // Cerrar recursos en el bloque finally
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
     public Object[][] verCitas(String UsUaRio) {
         List<Object[]> citas = new ArrayList<>();
         Connection con = null;
@@ -91,7 +137,7 @@ public class Paciente extends Usuario {
             int numeroDOCUMENTO;
             if (rta.next()) {
                 numeroDOCUMENTO = rta.getInt("num_documento");
-            }else{
+            } else {
                 return new Object[0][0];
             }
             String query2 = "SELECT documento_medico, fecha_hora FROM citas WHERE documento_paciente = ?";
@@ -108,7 +154,7 @@ public class Paciente extends Usuario {
                 stmt3.setInt(1, DocumentoMedico);
                 rta3 = stmt3.executeQuery();
                 if (rta3.next()) {
-                    datos[1] = rta3.getString("nombre_1") + " "+rta3.getString("apellido_1");
+                    datos[1] = rta3.getString("nombre_1") + " " + rta3.getString("apellido_1");
                     datos[2] = rta3.getString("especialidad");
                 }
                 citas.add(datos);
@@ -122,6 +168,12 @@ public class Paciente extends Usuario {
                 if (stmt != null) {
                     stmt.close();
                 }
+                if (stmt2 != null) {
+                    stmt2.close();
+                }
+                if (stmt3 != null) {
+                    stmt3.close();
+                }
                 if (con != null) {
                     con.close();
                 }
@@ -130,6 +182,9 @@ public class Paciente extends Usuario {
                 }
                 if (rta2 != null) {
                     rta2.close();
+                }
+                if (rta3 != null) {
+                    rta3.close();
                 }
             } catch (SQLException e) {
                 System.out.println("Error: " + e.getMessage());

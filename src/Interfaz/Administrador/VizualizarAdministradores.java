@@ -4,15 +4,15 @@ import Logica.Administrador;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class VizualizarMedicos extends javax.swing.JFrame {
+public class VizualizarAdministradores extends javax.swing.JFrame {
 
     Administrador A = new Administrador();
 
-    public VizualizarMedicos() {
+    public VizualizarAdministradores() {
         initComponents();
         this.setLocationRelativeTo(null);
-        DefaultTableModel tabla = new DefaultTableModel(A.visualizarMedicos(), new String[]{"NOMBRE", "APELLIDO", "TIPO DOCUMENTO","NUMERO DOCUMENTO","ESPECIALIDAD", "TELEFONO"});
-        JTMedicos.setModel(tabla);
+        DefaultTableModel tabla = new DefaultTableModel(A.visualizarAdministradores(), new String[]{"NOMBRE", "APELLIDO", "TIPO DOCUMENTO", "NUMERO DE DOCUMENTO", "NUMERO DE TELEFONO"});
+        JTAdministradores.setModel(tabla);
     }
 
     @SuppressWarnings("unchecked")
@@ -20,13 +20,13 @@ public class VizualizarMedicos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTMedicos = new javax.swing.JTable();
+        JTAdministradores = new javax.swing.JTable();
         BTNEliminar = new javax.swing.JButton();
         BTNEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        JTMedicos.setModel(new javax.swing.table.DefaultTableModel(
+        JTAdministradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -37,7 +37,7 @@ public class VizualizarMedicos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(JTMedicos);
+        jScrollPane1.setViewportView(JTAdministradores);
 
         BTNEliminar.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         BTNEliminar.setText("Eliminar");
@@ -59,57 +59,54 @@ public class VizualizarMedicos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addGap(90, 90, 90)
                 .addComponent(BTNEliminar)
-                .addGap(71, 71, 71)
+                .addGap(67, 67, 67)
                 .addComponent(BTNEditar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
+                .addContainerGap(151, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNEliminar)
                     .addComponent(BTNEditar))
-                .addGap(47, 47, 47)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNEliminarActionPerformed
-        int fila = JTMedicos.getSelectedRow();
+        int fila = JTAdministradores.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un paciente para eliminar");
         } else {
-            int numeroDocumento = Integer.parseInt(JTMedicos.getValueAt(fila, 2).toString());
-            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar al medico?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+            int numeroDocumento = Integer.parseInt(JTAdministradores.getValueAt(fila, 3).toString());
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar al paciente?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
-                A.eliminarMedico(numeroDocumento);
-                DefaultTableModel tabla = new DefaultTableModel(A.visualizarMedicos(), new String[]{"NOMBRE", "APELLIDO", "TIPO DOCUMENTO","NUMERO DOCUMENTO","ESPECIALIDAD", "TELEFONO"});
-                JTMedicos.setModel(tabla);
+                A.eliminarPaciente(numeroDocumento);
+                DefaultTableModel tabla = new DefaultTableModel(A.visualizarPacientes(), new String[]{"NOMBRE", "APELLIDO", "TIPO DOCUMENTO", "NUMERO DE DOCUMENTO", "SEGURO MEDICO", "NUMERO DE TELEFONO"});
+                JTAdministradores.setModel(tabla);
             }
         }
     }//GEN-LAST:event_BTNEliminarActionPerformed
 
     private void BTNEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNEditarActionPerformed
-        int fila = JTMedicos.getSelectedRow();
+        int fila = JTAdministradores.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un paciente para editar");
         } else {
-            int numeroDocumento = Integer.parseInt(JTMedicos.getValueAt(fila, 3).toString());
-            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea editar al medico?", "Editar Medico", JOptionPane.YES_NO_OPTION);
+            int numeroDocumento = Integer.parseInt(JTAdministradores.getValueAt(fila, 3).toString());
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea editar al paciente?", "Editar Paciente", JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
-                String [] datos = A.editarMedico(numeroDocumento);
-                new EditarMedico(datos).setVisible(true);
+                String [] datos = A.editarAdministrador(numeroDocumento);
+                new EditarAdministrador(datos).setVisible(true);
                 this.dispose();
             }
         }
@@ -129,20 +126,21 @@ public class VizualizarMedicos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VizualizarMedicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VizualizarAdministradores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VizualizarMedicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VizualizarAdministradores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VizualizarMedicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VizualizarAdministradores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VizualizarMedicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VizualizarAdministradores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VizualizarMedicos().setVisible(true);
+                new VizualizarAdministradores().setVisible(true);
             }
         });
     }
@@ -150,7 +148,7 @@ public class VizualizarMedicos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNEditar;
     private javax.swing.JButton BTNEliminar;
-    private javax.swing.JTable JTMedicos;
+    private javax.swing.JTable JTAdministradores;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

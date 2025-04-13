@@ -107,6 +107,52 @@ public class Medico extends Usuario {
     }
 
     @Override
+    public void actualizarDatos() {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = c.conectar();
+            String query = "UPDATE medicos SET nombre_1 = ?, nombre_2 = ?, apellido_1 = ?, apellido_2 = ?, tipo_documento = ?,fecha_nacimiento= ?, direccion= ?, barrio= ?, especialidad= ?, correo_electronico= ?, num_telefono= ?, usuario= ?, contrasena= ? WHERE num_documento = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, nombre1);
+            stmt.setString(2, nombre2);
+            stmt.setString(3, apellido1);
+            stmt.setString(4, apellido2);
+            stmt.setString(5, tipoDocumento);
+            java.sql.Date fechasql = new java.sql.Date(fechaNacimiento.getTime());
+            stmt.setDate(6, fechasql);
+            stmt.setString(7, direccion);
+            stmt.setString(8, barrio);
+            stmt.setString(9, especialidad);
+            stmt.setString(10, correo);
+            stmt.setString(11, telefono);
+            stmt.setString(12, usuario);
+            stmt.setString(13, contraseña);
+            stmt.setInt(14, numeroDocumento);
+            int filas = stmt.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Datos actualizados con exito", "Datos Actualizados", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println("Datos no actualizados");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            // Cerrar recursos en el bloque finally
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
     public Object[][] verCitas(String UsuariO) {
         List<Object[]> citas = new ArrayList<>();
         Connection con = null;

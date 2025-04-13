@@ -68,6 +68,51 @@ public class Administrador extends Usuario {
         }
     }
 
+    @Override
+    public void actualizarDatos() {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = c.conectar();
+            String query = "UPDATE administradores SET nombre_1 = ?, nombre_2 = ?, apellido_1 = ?, apellido_2 = ?, tipo_documento = ?, fecha_nacimiento = ?, direccion = ?, barrio = ?, correo_electronico = ?, num_telefono = ?, usuario = ?, contrasena = ? WHERE num_documento = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, nombre1);
+            stmt.setString(2, nombre2);
+            stmt.setString(3, apellido1);
+            stmt.setString(4, apellido2);
+            stmt.setString(5, tipoDocumento);
+            java.sql.Date fechasql = new java.sql.Date(fechaNacimiento.getTime());
+            stmt.setDate(6, fechasql);
+            stmt.setString(7, direccion);
+            stmt.setString(8, barrio);
+            stmt.setString(9, correo);
+            stmt.setString(10, telefono);
+            stmt.setString(11, usuario);
+            stmt.setString(12, contraseña);
+            stmt.setInt(13, numeroDocumento);
+            int filas = stmt.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Datos actualizados con exito", "Datos actualizados", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println("Datos Actualizados");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            // Cerrar recursos en el bloque finally
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+
     public Object[][] visualizarMedicos() {
         List<Object[]> medicos = new ArrayList<>();
         Connection con = null;
@@ -152,6 +197,47 @@ public class Administrador extends Usuario {
         return new Object[0][0];
     }
 
+    public Object[][] visualizarAdministradores() {
+        List<Object[]> administradores = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rta = null;
+        try {
+            con = c.conectar();
+            String query = "SELECT nombre_1, apellido_1, tipo_documento, num_documento, num_telefono FROM administradores";
+            stmt = con.prepareStatement(query);
+            rta = stmt.executeQuery();
+            while (rta.next()) {
+                Object[] fila = new Object[5];
+                fila[0] = rta.getString("nombre_1");
+                fila[1] = rta.getString("apellido_1");
+                fila[2] = rta.getString("tipo_documento");
+                fila[3] = rta.getInt("num_documento");
+                fila[4] = rta.getString("num_telefono");
+                administradores.add(fila);
+            }
+            return administradores.toArray(new Object[administradores.size()][6]);
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+        } finally {
+            // Cerrar recursos en el bloque finally
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (rta != null) {
+                    rta.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        return new Object[0][0];
+    }
+
     @Override
     public Object[][] verCitas(String UsUaRio) {
         List<Object[]> citas = new ArrayList<>();
@@ -191,14 +277,6 @@ public class Administrador extends Usuario {
                 }
 
                 citas.add(datos);
-
-                // Cerrar recursos internos en cada ciclo
-                if (rtaMedico != null) {
-                    rtaMedico.close();
-                }
-                if (stmtMedico != null) {
-                    stmtMedico.close();
-                }
             }
 
             return citas.toArray(new Object[citas.size()][4]);
@@ -215,6 +293,12 @@ public class Administrador extends Usuario {
                 }
                 if (con != null) {
                     con.close();
+                }
+                if (rtaMedico != null) {
+                    rtaMedico.close();
+                }
+                if (stmtMedico != null) {
+                    stmtMedico.close();
                 }
             } catch (SQLException e) {
                 System.out.println("Error al cerrar recursos: " + e.getMessage());
@@ -283,5 +367,148 @@ public class Administrador extends Usuario {
             }
 
         }
+    }
+
+    public String[] editarPaciente(int NumeroDocumentO) {
+        String[] paciente = new String[14];
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rta = null;
+        try {
+            con = c.conectar();
+            String query = "SELECT * FROM pacientes WHERE num_documento=?";
+            stmt = con.prepareCall(query);
+            stmt.setInt(1, NumeroDocumentO);
+            rta = stmt.executeQuery();
+            if (rta.next()) {
+                paciente[0] = rta.getString("nombre_1");
+                paciente[1] = rta.getString("nombre_2");
+                paciente[2] = rta.getString("apellido_1");
+                paciente[3] = rta.getString("apellido_2");
+                paciente[4] = rta.getString("tipo_documento");
+                paciente[5] = rta.getString("num_documento");
+                paciente[6] = rta.getString("fecha_nacimiento");
+                paciente[7] = rta.getString("direccion");
+                paciente[8] = rta.getString("barrio");
+                paciente[9] = rta.getString("seguro_medico");
+                paciente[10] = rta.getString("correo_electronico");
+                paciente[11] = rta.getString("num_telefono");
+                paciente[12] = rta.getString("usuario");
+                paciente[13] = rta.getString("contrasena");
+                return paciente;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (rta != null) {
+                    rta.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        return paciente;
+    }
+
+    public String[] editarMedico(int NumeroDocumentO) {
+        String[] medico = new String[14];
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rta = null;
+        try {
+            con = c.conectar();
+            String query = "SELECT * FROM medicos WHERE num_documento=?";
+            stmt = con.prepareCall(query);
+            stmt.setInt(1, NumeroDocumentO);
+            rta = stmt.executeQuery();
+            if (rta.next()) {
+                medico[0] = rta.getString("nombre_1");
+                medico[1] = rta.getString("nombre_2");
+                medico[2] = rta.getString("apellido_1");
+                medico[3] = rta.getString("apellido_2");
+                medico[4] = rta.getString("tipo_documento");
+                medico[5] = rta.getString("num_documento");
+                medico[6] = rta.getString("fecha_nacimiento");
+                medico[7] = rta.getString("direccion");
+                medico[8] = rta.getString("barrio");
+                medico[9] = rta.getString("especialidad");
+                medico[10] = rta.getString("correo_electronico");
+                medico[11] = rta.getString("num_telefono");
+                medico[12] = rta.getString("usuario");
+                medico[13] = rta.getString("contrasena");
+                return medico;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (rta != null) {
+                    rta.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        return medico;
+    }
+
+    public String[] editarAdministrador(int NumeroDocumentO) {
+        String[] administrador = new String[13];
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rta = null;
+        try {
+            con = c.conectar();
+            String query = "SELECT * FROM administradores WHERE num_documento=?";
+            stmt = con.prepareCall(query);
+            stmt.setInt(1, NumeroDocumentO);
+            rta = stmt.executeQuery();
+            if (rta.next()) {
+                administrador[0] = rta.getString("nombre_1");
+                administrador[1] = rta.getString("nombre_2");
+                administrador[2] = rta.getString("apellido_1");
+                administrador[3] = rta.getString("apellido_2");
+                administrador[4] = rta.getString("tipo_documento");
+                administrador[5] = rta.getString("num_documento");
+                administrador[6] = rta.getString("fecha_nacimiento");
+                administrador[7] = rta.getString("direccion");
+                administrador[8] = rta.getString("barrio");
+                administrador[9] = rta.getString("correo_electronico");
+                administrador[10] = rta.getString("num_telefono");
+                administrador[11] = rta.getString("usuario");
+                administrador[12] = rta.getString("contrasena");
+                return administrador;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (rta != null) {
+                    rta.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        return administrador;
     }
 }
