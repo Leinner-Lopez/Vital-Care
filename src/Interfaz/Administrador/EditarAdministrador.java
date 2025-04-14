@@ -23,7 +23,6 @@ public class EditarAdministrador extends javax.swing.JFrame {
     public EditarAdministrador(String[] administrador) {
         try {
             initComponents();
-            String[] partes = EditarPaciente.descomponerDireccion(administrador[7]);
             this.setLocationRelativeTo(this);
             this.setResizable(false);
             this.setTitle("Editar Paciente");
@@ -31,6 +30,7 @@ public class EditarAdministrador extends javax.swing.JFrame {
             BTNmostrar.setText("Mostrar");
             JPConfirmarContraseña.setEchoChar('•');
             JPContraseña.setEchoChar('•');
+            String[] partes = Usuario.descomponerDireccion(administrador[7]);
             JTnombre_1.setText(administrador[0]);
             JTnombre_2.setText(administrador[1]);
             JTapellido_1.setText(administrador[2]);

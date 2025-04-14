@@ -101,7 +101,6 @@ public class Establecer_Disponibilidad extends javax.swing.JFrame {
         if(fechaFinal.after(fechaInicio)){
             Medico M = new Medico();
             M.esteblecerDisponibilidad(fechaInicio, fechaFinal);
-            new Pantalla_PrincipalM().setVisible(true);
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Fechas incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
