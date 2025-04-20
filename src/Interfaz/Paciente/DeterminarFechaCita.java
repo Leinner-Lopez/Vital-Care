@@ -13,6 +13,7 @@ public class DeterminarFechaCita extends javax.swing.JFrame {
 
     public DeterminarFechaCita(ArrayList<String> citasDisponibles, String nombre_1, String apellido_1, String especialidad, int numeroDocumento) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.numeroDocumento = numeroDocumento;
         JLnombre.setText(nombre_1);
         JLApellido.setText(apellido_1);
