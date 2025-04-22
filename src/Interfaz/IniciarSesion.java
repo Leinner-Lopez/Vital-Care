@@ -2,7 +2,7 @@ package Interfaz;
 
 import Interfaz.Medico.Pantalla_PrincipalM;
 import Interfaz.Administrador.Pantalla_Principal;
-import Interfaz.Paciente.Pantalla_PrincipalP;
+import Interfaz.Paciente.VentanaPrincipalP;
 import Logica.Paciente;
 import Logica.Usuario;
 import javax.swing.JOptionPane;
@@ -139,7 +139,7 @@ public class IniciarSesion extends javax.swing.JFrame {
                 case "pacientes":
                     JOptionPane.showMessageDialog(null, "Bienvenido " + JTUsuario.getText(), "Usuario Paciente", JOptionPane.INFORMATION_MESSAGE);
                     U.setUsuario(JTUsuario.getText());
-                    new Pantalla_PrincipalP().setVisible(true);
+                    new VentanaPrincipalP().setVisible(true);
                     this.dispose();
                     break;
                 case "medicos":
