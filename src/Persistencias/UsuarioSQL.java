@@ -56,17 +56,51 @@ public abstract class UsuarioSQL {
         return "";
     }
 
-    public boolean buscarExitenciadeUsuario(int NumeroDocumento) {
-        String[] tablas = {"pacientes", "medicos", "administradores"};
+    public boolean buscarExitenciadeNumeroDocumento(int NumeroDocumento, String tabla) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rta = null;
         try {
             con = c.conectar();
-            for (String i : tablas) {
-                String query = "SELECT usuario FROM " + i + " WHERE num_documento = ?";
+            String query = "SELECT usuario FROM " + tabla + " WHERE num_documento = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, NumeroDocumento);
+            rta = stmt.executeQuery();
+            if (rta.next()) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (rta != null) {
+                    rta.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        return false;
+    }
+
+    public boolean buscarExitenciadeUsuario(String Usuario) {
+        String[] tablas = {"pacientes", "medicos", "administradores"};
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rta = null;
+        try {
+            for (String tabla: tablas) {
+                con = c.conectar();
+                String query = "SELECT num_documento FROM "+tabla+" WHERE usuario = ?";
                 stmt = con.prepareStatement(query);
-                stmt.setInt(1, NumeroDocumento);
+                stmt.setString(1, Usuario);
                 rta = stmt.executeQuery();
                 if (rta.next()) {
                     return true;

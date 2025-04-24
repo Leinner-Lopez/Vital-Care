@@ -1,7 +1,6 @@
 package Persistencias;
 
 import Modelos.Administrador;
-import Modelos.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

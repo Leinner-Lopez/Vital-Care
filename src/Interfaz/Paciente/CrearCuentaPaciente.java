@@ -431,8 +431,9 @@ public class CrearCuentaPaciente extends javax.swing.JFrame {
                 if (JCBIS.isSelected()) {
                     Bis = "Bis";
                 }
-                if (U.buscarExitenciadeUsuario(Integer.parseInt(JTNumero_Documento.getText()))) {
-                    JOptionPane.showMessageDialog(null, "Ya hay un usuario existente", "Error", JOptionPane.ERROR_MESSAGE);
+                if (U.buscarExitenciadeNumeroDocumento(Integer.parseInt(JTNumero_Documento.getText()),"pacientes")
+                        || U.buscarExitenciadeUsuario(JTUsuario.getText())) {
+                    JOptionPane.showMessageDialog(null, "Ya hay una persona con el mismo numero de documento o usuario", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     String Direccion = Metodos.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
                     Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
