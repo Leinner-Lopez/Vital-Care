@@ -1,12 +1,12 @@
 package Interfaz.Administrador;
 
-import Logica.Administrador;
+import Persistencias.AdministradorSQL;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VizualizarAdministradores extends javax.swing.JFrame {
 
-    Administrador A = new Administrador();
+    AdministradorSQL A = new AdministradorSQL();
 
     public VizualizarAdministradores() {
         initComponents();
@@ -85,13 +85,13 @@ public class VizualizarAdministradores extends javax.swing.JFrame {
     private void BTNEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNEliminarActionPerformed
         int fila = JTAdministradores.getSelectedRow();
         if (fila == -1) {
-            JOptionPane.showMessageDialog(null, "Seleccione un paciente para eliminar");
+            JOptionPane.showMessageDialog(null, "Seleccione un administrador para eliminar");
         } else {
             int numeroDocumento = Integer.parseInt(JTAdministradores.getValueAt(fila, 3).toString());
-            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar al paciente?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar al administrador?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
-                A.eliminarPaciente(numeroDocumento);
-                DefaultTableModel tabla = new DefaultTableModel(A.visualizarPacientes(), new String[]{"NOMBRE", "APELLIDO", "TIPO DOCUMENTO", "NUMERO DE DOCUMENTO", "SEGURO MEDICO", "NUMERO DE TELEFONO"});
+                A.eliminarAdministrador(numeroDocumento);
+                DefaultTableModel tabla = new DefaultTableModel(A.visualizarAdministradores(), new String[]{"NOMBRE", "APELLIDO", "TIPO DOCUMENTO", "NUMERO DE DOCUMENTO", "SEGURO MEDICO", "NUMERO DE TELEFONO"});
                 JTAdministradores.setModel(tabla);
             }
         }
@@ -103,7 +103,7 @@ public class VizualizarAdministradores extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Seleccione un paciente para editar");
         } else {
             int numeroDocumento = Integer.parseInt(JTAdministradores.getValueAt(fila, 3).toString());
-            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea editar al paciente?", "Editar Paciente", JOptionPane.YES_NO_OPTION);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea editar al administrador?", "Editar Paciente", JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
                 String [] datos = A.editarAdministrador(numeroDocumento);
                 new EditarAdministrador(datos).setVisible(true);

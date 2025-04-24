@@ -1,13 +1,13 @@
 package Interfaz.Administrador;
-import Logica.Administrador;
-import Logica.Paciente;
-import Logica.Usuario;
+import Modelos.Administrador;
+import Persistencias.AdministradorSQL;
+import Persistencias.Metodos;
+import Persistencias.UsuarioSQL;
 import java.util.Date;
-import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
 public class CrearCuentaAdministrador extends javax.swing.JFrame {
-    Usuario U = new Paciente();
+    UsuarioSQL U = new AdministradorSQL();
     boolean estado = false;
 
     public CrearCuentaAdministrador() {
@@ -417,10 +417,12 @@ public class CrearCuentaAdministrador extends javax.swing.JFrame {
                 if (U.buscarExitenciadeUsuario(Integer.parseInt(JTNumero_Documento.getText()))) {
                     JOptionPane.showMessageDialog(null, "Ya hay un usuario existente", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    String Direccion = CrearCuentaAdministrador.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
+                    String Direccion = Metodos.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
                     Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
                     Administrador A = new Administrador(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra);
-                    A.registrar();
+                    Administrador.setUsuario(JTUsuario.getText());
+                    AdministradorSQL AS = new AdministradorSQL(A);
+                    AS.registrar();
                 }
             }
         }else {
@@ -441,20 +443,7 @@ public class CrearCuentaAdministrador extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BTNmostrarActionPerformed
-    public static String direccion(String a,String b,String c,String d,String e,String f,String g,String h){
-        StringJoiner direccionJ = new StringJoiner(" ");
-        direccionJ.add(a);
-        direccionJ.add(b);
-        if (!c.isEmpty()) direccionJ.add(c);
-        if (!d.isEmpty()) direccionJ.add(d);
-        if (!e.isEmpty()) direccionJ.add(e);
-        direccionJ.add("#");
-        direccionJ.add(f);
-        if (!g.isEmpty()) direccionJ.add(g);
-        direccionJ.add("-");
-        direccionJ.add(h);
-        return direccionJ.toString();
-    }
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

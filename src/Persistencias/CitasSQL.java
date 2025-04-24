@@ -1,18 +1,18 @@
-package Logica;
+package Persistencias;
 
-import Conexion.Conexion;
-import java.sql.ResultSet;
+import Modelos.Usuario;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-public class Citas {
+public class CitasSQL {
 
     Conexion c = new Conexion();
 
@@ -143,7 +143,7 @@ public class Citas {
                     con.close();
                 }
             } catch (SQLException e) {
-                System.out.println("Error: "+e.getMessage());
+                System.out.println("Error: " + e.getMessage());
             }
         }
     }

@@ -1,11 +1,11 @@
 package Interfaz.Paciente;
 
-import Logica.Paciente;
-import Logica.Usuario;
+import Persistencias.PacienteSQL;
+import Modelos.Usuario;
 import javax.swing.table.DefaultTableModel;
 
 public class VerCitas extends javax.swing.JFrame {
-    Paciente P = new Paciente();
+    PacienteSQL P = new PacienteSQL();
 
     public VerCitas() {
         initComponents();
@@ -56,9 +56,6 @@ public class VerCitas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -1,9 +1,9 @@
 package Interfaz.Administrador;
-import Logica.Usuario;
+import Modelos.Usuario;
 import javax.swing.table.DefaultTableModel;
-import Logica.Administrador;
+import Persistencias.AdministradorSQL;
 public class VizualizarCitas extends javax.swing.JFrame {
-    Administrador A = new Administrador();
+    AdministradorSQL A = new AdministradorSQL();
     public VizualizarCitas() {
         initComponents();
         this.setLocationRelativeTo(null);

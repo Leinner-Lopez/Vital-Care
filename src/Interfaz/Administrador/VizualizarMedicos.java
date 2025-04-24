@@ -1,12 +1,12 @@
 package Interfaz.Administrador;
 
-import Logica.Administrador;
+import Persistencias.AdministradorSQL;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VizualizarMedicos extends javax.swing.JFrame {
 
-    Administrador A = new Administrador();
+    AdministradorSQL A = new AdministradorSQL();
 
     public VizualizarMedicos() {
         initComponents();

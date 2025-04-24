@@ -1,18 +1,19 @@
 package Interfaz.Medico;
-
-import Logica.Medico;
-import Logica.Usuario;
+import Modelos.Usuario;
+import Modelos.Medico;
+import Persistencias.MedicoSQL;
+import Persistencias.UsuarioSQL;
 
 public class Pantalla_PrincipalM extends javax.swing.JFrame {
-
-    Usuario u = new Medico();
+    UsuarioSQL u = new MedicoSQL();
+    Usuario user = new Medico();
 
     public Pantalla_PrincipalM() {
         initComponents();
         this.setLocationRelativeTo(null);
-        u.recuperarNombreyCorreo();
-        JLNombre.setText(u.getNombre1() + " " + u.getApellido1());
-        JLCorreo.setText(u.getCorreo());
+        user = u.recuperarNombreyCorreo();
+        JLNombre.setText(user.getNombre1() + " " + user.getApellido1());
+        JLCorreo.setText(user.getCorreo());
     }
 
     @SuppressWarnings("unchecked")

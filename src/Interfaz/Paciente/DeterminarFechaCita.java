@@ -1,6 +1,6 @@
 package Interfaz.Paciente;
 
-import Logica.Citas;
+import Persistencias.CitasSQL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class DeterminarFechaCita extends javax.swing.JFrame {
 
-    Citas c = new Citas();
+    CitasSQL c = new CitasSQL();
     int numeroDocumento;
 
     public DeterminarFechaCita(ArrayList<String> citasDisponibles, String nombre_1, String apellido_1, String especialidad, int numeroDocumento) {

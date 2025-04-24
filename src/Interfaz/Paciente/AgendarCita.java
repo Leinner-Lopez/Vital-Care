@@ -1,14 +1,14 @@
 package Interfaz.Paciente;
-import Logica.Citas;
-import Logica.Paciente;
+import Persistencias.CitasSQL;
+import Persistencias.PacienteSQL;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class AgendarCita extends javax.swing.JFrame {
-    Paciente P = new Paciente();
-    Citas c =  new Citas();
+    PacienteSQL P = new PacienteSQL();
+    CitasSQL c =  new CitasSQL();
     public AgendarCita() {
         initComponents();
         this.setLocationRelativeTo(null);

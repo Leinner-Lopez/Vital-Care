@@ -1,7 +1,9 @@
 package Interfaz.Paciente;
 
-import Logica.Paciente;
-import Logica.Usuario;
+import Persistencias.PacienteSQL;
+import Persistencias.UsuarioSQL;
+import Modelos.Paciente;
+import Modelos.Usuario;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -11,31 +13,15 @@ import java.awt.event.ActionListener;
 
 public class Pantalla_PrincipalP extends javax.swing.JFrame {
 
-    Usuario u = new Paciente();
+    UsuarioSQL u = new PacienteSQL();
+    Usuario user = new Paciente();
 
     public Pantalla_PrincipalP() {
         initComponents();
         this.setLocationRelativeTo(null);
-        u.recuperarNombreyCorreo();
-        JLNombre.setText(u.getNombre1() + " " + u.getApellido1());
-        JLCorreo.setText(u.getCorreo());
-    }
-
-    private void configurarBotonSubmenu(JButton btn) {
-        btn.setAlignmentX(Component.LEFT_ALIGNMENT);
-        btn.setMaximumSize(new Dimension(150, 35));
-        btn.setFocusPainted(false);
-        btn.setBackground(new Color(90, 90, 90));
-        btn.setForeground(Color.LIGHT_GRAY);
-
-        btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String opcion = btn.getText().trim();
-
-                // Aquí puedes abrir tu ventana específica
-            }
-        });
+        user = u.recuperarNombreyCorreo();
+        JLNombre.setText(user.getNombre1() + " " + user.getApellido1());
+        JLCorreo.setText(user.getCorreo());
     }
 
     @SuppressWarnings("unchecked")
@@ -77,17 +63,16 @@ public class Pantalla_PrincipalP extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(JLco))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(JLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(277, 277, 277))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JLCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JLus))
-                        .addGap(9, 9, 9)))
-                .addGap(277, 277, 277))
+                            .addComponent(JLus)
+                            .addComponent(JLCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(137, 137, 137))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

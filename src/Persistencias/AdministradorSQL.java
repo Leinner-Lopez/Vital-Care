@@ -1,26 +1,26 @@
-package Logica;
+package Persistencias;
 
+import Modelos.Administrador;
+import Modelos.Usuario;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Date;
-import Conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class Administrador extends Usuario {
-
+public class AdministradorSQL extends UsuarioSQL {
     private Conexion c = new Conexion();
+    private Administrador admin;
 
-    public Administrador() {
+    public AdministradorSQL(Administrador admin) {
+        this.admin = admin;
     }
-
-    public Administrador(String nombre1, String nombre2, String apellido1, String apellido2, String tipoDocumento, int numeroDocumento, Date fechaNacimiento, String correo, String telefono, String direccion, String barrio, String usuario, String contraseña) {
-        super(nombre1, nombre2, apellido1, apellido2, tipoDocumento, numeroDocumento, fechaNacimiento, correo, telefono, direccion, barrio, usuario, contraseña);
+    
+    public AdministradorSQL() {
     }
 
     @Override
@@ -31,20 +31,20 @@ public class Administrador extends Usuario {
             con = c.conectar();
             String query = "INSERT INTO administradores (nombre_1, nombre_2, apellido_1, apellido_2, tipo_documento, num_documento, fecha_nacimiento, direccion, barrio, correo_electronico, num_telefono, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(query);
-            stmt.setString(1, nombre1);
-            stmt.setString(2, nombre2);
-            stmt.setString(3, apellido1);
-            stmt.setString(4, apellido2);
-            stmt.setString(5, tipoDocumento);
-            stmt.setInt(6, numeroDocumento);
-            java.sql.Date fechasql = new java.sql.Date(fechaNacimiento.getTime());
+            stmt.setString(1, admin.getNombre1());
+            stmt.setString(2, admin.getNombre2());
+            stmt.setString(3, admin.getApellido1());
+            stmt.setString(4, admin.getApellido2());
+            stmt.setString(5, admin.getTipoDocumento());
+            stmt.setInt(6, admin.getNumeroDocumento());
+            java.sql.Date fechasql = new java.sql.Date(admin.getFechaNacimiento().getTime());
             stmt.setDate(7, fechasql);
-            stmt.setString(8, direccion);
-            stmt.setString(9, barrio);
-            stmt.setString(10, correo);
-            stmt.setString(11, telefono);
-            stmt.setString(12, usuario);
-            stmt.setString(13, contraseña);
+            stmt.setString(8, admin.getDireccion());
+            stmt.setString(9, admin.getBarrio());
+            stmt.setString(10, admin.getCorreo());
+            stmt.setString(11, admin.getTelefono());
+            stmt.setString(12, Administrador.getUsuario());
+            stmt.setString(13, admin.getContraseña());
             int filas = stmt.executeUpdate();
             if (filas > 0) {
                 JOptionPane.showMessageDialog(null, "Datos registrados con exito", "Usuario Registrado", JOptionPane.INFORMATION_MESSAGE);
@@ -76,20 +76,20 @@ public class Administrador extends Usuario {
             con = c.conectar();
             String query = "UPDATE administradores SET nombre_1 = ?, nombre_2 = ?, apellido_1 = ?, apellido_2 = ?, tipo_documento = ?, fecha_nacimiento = ?, direccion = ?, barrio = ?, correo_electronico = ?, num_telefono = ?, usuario = ?, contrasena = ? WHERE num_documento = ?";
             stmt = con.prepareStatement(query);
-            stmt.setString(1, nombre1);
-            stmt.setString(2, nombre2);
-            stmt.setString(3, apellido1);
-            stmt.setString(4, apellido2);
-            stmt.setString(5, tipoDocumento);
-            java.sql.Date fechasql = new java.sql.Date(fechaNacimiento.getTime());
+            stmt.setString(1, admin.getNombre1());
+            stmt.setString(2, admin.getNombre2());
+            stmt.setString(3, admin.getApellido1());
+            stmt.setString(4, admin.getApellido2());
+            stmt.setString(5, admin.getTipoDocumento());
+            java.sql.Date fechasql = new java.sql.Date(admin.getFechaNacimiento().getTime());
             stmt.setDate(6, fechasql);
-            stmt.setString(7, direccion);
-            stmt.setString(8, barrio);
-            stmt.setString(9, correo);
-            stmt.setString(10, telefono);
-            stmt.setString(11, usuario);
-            stmt.setString(12, contraseña);
-            stmt.setInt(13, numeroDocumento);
+            stmt.setString(7, admin.getDireccion());
+            stmt.setString(8, admin.getBarrio());
+            stmt.setString(9, admin.getCorreo());
+            stmt.setString(10, admin.getTelefono());
+            stmt.setString(11, Administrador.getUsuario());
+            stmt.setString(12, admin.getContraseña());
+            stmt.setInt(13, admin.getNumeroDocumento());
             int filas = stmt.executeUpdate();
             if (filas > 0) {
                 JOptionPane.showMessageDialog(null, "Datos actualizados con exito", "Datos actualizados", JOptionPane.INFORMATION_MESSAGE);
@@ -111,6 +111,76 @@ public class Administrador extends Usuario {
                 System.out.println("Error: " + e.getMessage());
             }
         }
+    }
+
+    @Override
+    public Object[][] verCitas(String Usuario) {
+        List<Object[]> citas = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stmtCitas = null;
+        PreparedStatement stmtMedico = null;
+        ResultSet rtaCitas = null;
+        ResultSet rtaMedico = null;
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            con = c.conectar();
+            String queryCitas = "SELECT documento_paciente, documento_medico, fecha_hora FROM citas";
+            stmtCitas = con.prepareStatement(queryCitas);
+            rtaCitas = stmtCitas.executeQuery();
+
+            while (rtaCitas.next()) {
+                Object[] datos = new Object[4];
+
+                int docPaciente = rtaCitas.getInt("documento_paciente");
+                int docMedico = rtaCitas.getInt("documento_medico");
+                Timestamp fechaHora = rtaCitas.getTimestamp("fecha_hora");
+
+                datos[0] = docPaciente;
+                datos[3] = formato.format(fechaHora);
+
+                // Buscar datos del médico
+                String queryMedico = "SELECT nombre_1, apellido_1, especialidad FROM medicos WHERE num_documento = ?";
+                stmtMedico = con.prepareStatement(queryMedico);
+                stmtMedico.setInt(1, docMedico);
+                rtaMedico = stmtMedico.executeQuery();
+
+                if (rtaMedico.next()) {
+                    String nombreCompleto = rtaMedico.getString("nombre_1") + " " + rtaMedico.getString("apellido_1");
+                    datos[1] = nombreCompleto;
+                    datos[2] = rtaMedico.getString("especialidad");
+                }
+
+                citas.add(datos);
+            }
+
+            return citas.toArray(new Object[citas.size()][4]);
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (rtaCitas != null) {
+                    rtaCitas.close();
+                }
+                if (stmtCitas != null) {
+                    stmtCitas.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (rtaMedico != null) {
+                    rtaMedico.close();
+                }
+                if (stmtMedico != null) {
+                    stmtMedico.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+
+        return new Object[0][0];
     }
 
     public Object[][] visualizarMedicos() {
@@ -238,76 +308,6 @@ public class Administrador extends Usuario {
         return new Object[0][0];
     }
 
-    @Override
-    public Object[][] verCitas(String UsUaRio) {
-        List<Object[]> citas = new ArrayList<>();
-        Connection con = null;
-        PreparedStatement stmtCitas = null;
-        PreparedStatement stmtMedico = null;
-        ResultSet rtaCitas = null;
-        ResultSet rtaMedico = null;
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        try {
-            con = c.conectar();
-            String queryCitas = "SELECT documento_paciente, documento_medico, fecha_hora FROM citas";
-            stmtCitas = con.prepareStatement(queryCitas);
-            rtaCitas = stmtCitas.executeQuery();
-
-            while (rtaCitas.next()) {
-                Object[] datos = new Object[4];
-
-                int docPaciente = rtaCitas.getInt("documento_paciente");
-                int docMedico = rtaCitas.getInt("documento_medico");
-                Timestamp fechaHora = rtaCitas.getTimestamp("fecha_hora");
-
-                datos[0] = docPaciente;
-                datos[3] = formato.format(fechaHora);
-
-                // Buscar datos del médico
-                String queryMedico = "SELECT nombre_1, apellido_1, especialidad FROM medicos WHERE num_documento = ?";
-                stmtMedico = con.prepareStatement(queryMedico);
-                stmtMedico.setInt(1, docMedico);
-                rtaMedico = stmtMedico.executeQuery();
-
-                if (rtaMedico.next()) {
-                    String nombreCompleto = rtaMedico.getString("nombre_1") + " " + rtaMedico.getString("apellido_1");
-                    datos[1] = nombreCompleto;
-                    datos[2] = rtaMedico.getString("especialidad");
-                }
-
-                citas.add(datos);
-            }
-
-            return citas.toArray(new Object[citas.size()][4]);
-
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        } finally {
-            try {
-                if (rtaCitas != null) {
-                    rtaCitas.close();
-                }
-                if (stmtCitas != null) {
-                    stmtCitas.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-                if (rtaMedico != null) {
-                    rtaMedico.close();
-                }
-                if (stmtMedico != null) {
-                    stmtMedico.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar recursos: " + e.getMessage());
-            }
-        }
-
-        return new Object[0][0];
-    }
-
     public void eliminarPaciente(int NUMERODocumento) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -365,7 +365,36 @@ public class Administrador extends Usuario {
             } catch (SQLException e) {
                 System.out.println("Error: " + e.getMessage());
             }
+        }
+    }
 
+    public void eliminarAdministrador(int NuMeRoDocumento) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = c.conectar();
+            String query = "DELETE FROM administradores WHERE num_documento = ?";
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, NuMeRoDocumento);
+            int filas = stmt.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Medico eliminado con exito", "Medico Eliminado", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println("No pudo eliminar el Medico");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
     }
 

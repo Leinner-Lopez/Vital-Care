@@ -1,17 +1,19 @@
 package Interfaz.Administrador;
-import Logica.Administrador;
-import Logica.Usuario;
+import Modelos.Administrador;
+import Modelos.Usuario;
+import Persistencias.AdministradorSQL;
+import Persistencias.UsuarioSQL;
 
 public class Pantalla_Principal extends javax.swing.JFrame {
-
-    Usuario u = new Administrador();
+    UsuarioSQL u = new AdministradorSQL();
+    Usuario user = new Administrador();
 
     public Pantalla_Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        u.recuperarNombreyCorreo();
-        JLNombre.setText(u.getNombre1() + " " + u.getApellido1());
-        JLCorreo.setText(u.getCorreo());
+        user = u.recuperarNombreyCorreo();
+        JLNombre.setText(user.getNombre1() + " " + user.getApellido1());
+        JLCorreo.setText(user.getCorreo());
     }
 
     @SuppressWarnings("unchecked")

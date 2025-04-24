@@ -1,18 +1,14 @@
 package Interfaz.Administrador;
-
-import Logica.Administrador;
-import Logica.Paciente;
-import Logica.Usuario;
+import Persistencias.Metodos;
+import Modelos.Administrador;
+import Persistencias.AdministradorSQL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
 public class EditarAdministrador extends javax.swing.JFrame {
 
-    String administrador[];
-    Usuario U = new Paciente();
     boolean estado = false;
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -26,11 +22,10 @@ public class EditarAdministrador extends javax.swing.JFrame {
             this.setLocationRelativeTo(this);
             this.setResizable(false);
             this.setTitle("Editar Paciente");
-            this.administrador = administrador;
             BTNmostrar.setText("Mostrar");
             JPConfirmarContraseña.setEchoChar('•');
             JPContraseña.setEchoChar('•');
-            String[] partes = Usuario.descomponerDireccion(administrador[7]);
+            String[] partes = Metodos.descomponerDireccion(administrador[7]);
             JTnombre_1.setText(administrador[0]);
             JTnombre_2.setText(administrador[1]);
             JTapellido_1.setText(administrador[2]);
@@ -450,10 +445,12 @@ public class EditarAdministrador extends javax.swing.JFrame {
                 if (JCBIS.isSelected()) {
                     Bis = "Bis";
                 }
-                String Direccion = EditarAdministrador.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
+                String Direccion = Metodos.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
                 Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
                 Administrador A = new Administrador(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra);
-                A.actualizarDatos();
+                Administrador.setUsuario(JTUsuario.getText());
+                AdministradorSQL AS = new AdministradorSQL(A);
+                AS.actualizarDatos();
                 this.dispose();
                 new VizualizarAdministradores().setVisible(true);
             }
@@ -475,28 +472,6 @@ public class EditarAdministrador extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BTNmostrarActionPerformed
-    public static String direccion(String a, String b, String c, String d, String e, String f, String g, String h) {
-        StringJoiner direccionJ = new StringJoiner(" ");
-        direccionJ.add(a);
-        direccionJ.add(b);
-        if (!c.isEmpty()) {
-            direccionJ.add(c);
-        }
-        if (!d.isEmpty()) {
-            direccionJ.add(d);
-        }
-        if (!e.isEmpty()) {
-            direccionJ.add(e);
-        }
-        direccionJ.add("#");
-        direccionJ.add(f);
-        if (!g.isEmpty()) {
-            direccionJ.add(g);
-        }
-        direccionJ.add("-");
-        direccionJ.add(h);
-        return direccionJ.toString();
-    }
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -1,6 +1,6 @@
 package Interfaz.Medico;
 
-import Logica.Medico;
+import Persistencias.MedicoSQL;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -99,7 +99,7 @@ public class Establecer_Disponibilidad extends javax.swing.JFrame {
         fechaInicio = (Date) JSInicio.getValue();
         fechaFinal = (Date) JSFin.getValue();
         if(fechaFinal.after(fechaInicio)){
-            Medico M = new Medico();
+            MedicoSQL M = new MedicoSQL();
             M.esteblecerDisponibilidad(fechaInicio, fechaFinal);
             this.dispose();
         }else{

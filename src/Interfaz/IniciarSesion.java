@@ -2,9 +2,10 @@ package Interfaz;
 
 import Interfaz.Medico.Pantalla_PrincipalM;
 import Interfaz.Administrador.Pantalla_Principal;
-import Interfaz.Paciente.VentanaPrincipalP;
-import Logica.Paciente;
-import Logica.Usuario;
+import Interfaz.Paciente.Pantalla_PrincipalP;
+import Modelos.Usuario;
+import Persistencias.UsuarioSQL;
+import Persistencias.PacienteSQL;
 import javax.swing.JOptionPane;
 
 public class IniciarSesion extends javax.swing.JFrame {
@@ -131,26 +132,26 @@ public class IniciarSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEstadoContraseñaActionPerformed
 
     private void btnIniciar_SesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar_SesionActionPerformed
-        Usuario U = new Paciente();
+        UsuarioSQL U = new PacienteSQL();
         String contra = new String(JPContraseña.getPassword()).trim();
         if (!JTUsuario.getText().equals("") && !contra.equals("")) {
             String rol = U.verificarDatos(JTUsuario.getText(), contra);
             switch (rol) {
                 case "pacientes":
                     JOptionPane.showMessageDialog(null, "Bienvenido " + JTUsuario.getText(), "Usuario Paciente", JOptionPane.INFORMATION_MESSAGE);
-                    U.setUsuario(JTUsuario.getText());
-                    new VentanaPrincipalP().setVisible(true);
+                    Usuario.setUsuario(JTUsuario.getText());
+                    new Pantalla_PrincipalP().setVisible(true);
                     this.dispose();
                     break;
                 case "medicos":
                     JOptionPane.showMessageDialog(null, "Bienvenido " + JTUsuario.getText(), "Usuario Medico", JOptionPane.INFORMATION_MESSAGE);
-                    U.setUsuario(JTUsuario.getText());
+                    Usuario.setUsuario(JTUsuario.getText());
                     new Pantalla_PrincipalM().setVisible(true);
                     this.dispose();
                     break;
                 case "administradores":
                     JOptionPane.showMessageDialog(null, "Bienvenido " + JTUsuario.getText(), "Usuario Administrador", JOptionPane.INFORMATION_MESSAGE);
-                    U.setUsuario(JTUsuario.getText());
+                    Usuario.setUsuario(JTUsuario.getText());
                     new Pantalla_Principal().setVisible(true);
                     this.dispose();
                     break;

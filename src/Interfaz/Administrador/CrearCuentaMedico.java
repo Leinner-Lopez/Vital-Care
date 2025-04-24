@@ -1,14 +1,15 @@
 package Interfaz.Administrador;
 
-import Logica.Medico;
-import Logica.Usuario;
+import Modelos.Medico;
+import Persistencias.MedicoSQL;
+import Persistencias.Metodos;
+import Persistencias.UsuarioSQL;
 import java.util.Date;
-import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
 public class CrearCuentaMedico extends javax.swing.JFrame {
 
-    Usuario U = new Medico();
+    UsuarioSQL U = new MedicoSQL();
     boolean estado = false;
 
     public CrearCuentaMedico() {
@@ -303,7 +304,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                                 .addComponent(JLSeguroMedico)
                                 .addGap(18, 18, 18)
                                 .addComponent(CBEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addGap(0, 12, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -398,7 +399,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                                 .addComponent(JLConfirmarContraseña)
                                 .addComponent(JPConfirmarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(BTNmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -431,10 +432,12 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                 if (U.buscarExitenciadeUsuario(Integer.parseInt(JTNumero_Documento.getText()))) {
                     JOptionPane.showMessageDialog(null, "Ya hay un usuario existente", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    String Direccion = CrearCuentaAdministrador.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
+                    String Direccion = Metodos.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
                     Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
                     Medico M = new Medico(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra, CBEspecialidad.getSelectedItem().toString());
-                    M.registrar();
+                    Medico.setUsuario(JTUsuario.getText());
+                    MedicoSQL MS = new MedicoSQL(M);
+                    MS.registrar();
                 }
             }
         } else {
@@ -455,28 +458,6 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BTNmostrarActionPerformed
-    public static String direccion(String a, String b, String c, String d, String e, String f, String g, String h) {
-        StringJoiner direccionJ = new StringJoiner(" ");
-        direccionJ.add(a);
-        direccionJ.add(b);
-        if (!c.isEmpty()) {
-            direccionJ.add(c);
-        }
-        if (!d.isEmpty()) {
-            direccionJ.add(d);
-        }
-        if (!e.isEmpty()) {
-            direccionJ.add(e);
-        }
-        direccionJ.add("#");
-        direccionJ.add(f);
-        if (!g.isEmpty()) {
-            direccionJ.add(g);
-        }
-        direccionJ.add("-");
-        direccionJ.add(h);
-        return direccionJ.toString();
-    }
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

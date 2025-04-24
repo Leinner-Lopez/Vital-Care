@@ -1,12 +1,13 @@
 package Interfaz.Administrador;
-import Logica.Paciente;
-import Logica.Usuario;
+import Modelos.Paciente;
+import Persistencias.Metodos;
+import Persistencias.UsuarioSQL;
+import Persistencias.PacienteSQL;
 import java.util.Date;
-import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
 public class CrearCuentaPaciente extends javax.swing.JFrame {
-    Usuario U = new Paciente();
+    UsuarioSQL U = new PacienteSQL();
     boolean estado = false;
 
     public CrearCuentaPaciente() {
@@ -429,10 +430,12 @@ public class CrearCuentaPaciente extends javax.swing.JFrame {
                 if (U.buscarExitenciadeUsuario(Integer.parseInt(JTNumero_Documento.getText()))) {
                     JOptionPane.showMessageDialog(null, "Ya hay un usuario existente", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    String Direccion = CrearCuentaPaciente.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
+                    String Direccion = Metodos.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
                     Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
                     Paciente P = new Paciente(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), CBSeguroMedico.getSelectedItem().toString(), JTUsuario.getText(), contra);
-                    P.registrar();
+                    Paciente.setUsuario(JTUsuario.getText());
+                    PacienteSQL PS = new PacienteSQL(P);
+                    PS.registrar();
                 }
             }
         }
@@ -482,21 +485,6 @@ public class CrearCuentaPaciente extends javax.swing.JFrame {
                 new CrearCuentaPaciente().setVisible(true);
             }
         });
-    }
-    
-    public static String direccion(String a,String b,String c,String d,String e,String f,String g,String h){
-        StringJoiner direccionJ = new StringJoiner(" ");
-        direccionJ.add(a);
-        direccionJ.add(b);
-        if (!c.isEmpty()) direccionJ.add(c);
-        if (!d.isEmpty()) direccionJ.add(d);
-        if (!e.isEmpty()) direccionJ.add(e);
-        direccionJ.add("#");
-        direccionJ.add(f);
-        if (!g.isEmpty()) direccionJ.add(g);
-        direccionJ.add("-");
-        direccionJ.add(h);
-        return direccionJ.toString();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNResgistrarse;

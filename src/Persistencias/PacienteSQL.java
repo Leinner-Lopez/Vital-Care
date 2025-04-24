@@ -1,74 +1,25 @@
-package Logica;
+package Persistencias;
 
-import java.sql.ResultSet;
+import Modelos.Paciente;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import java.util.Date;
-import Conexion.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class Paciente extends Usuario {
+public class PacienteSQL extends UsuarioSQL {
 
-    private String seguroMedico;
-    private final Conexion c = new Conexion();
+    Paciente paciente;
+    Conexion c = new Conexion();
 
-    public Paciente() {
+    public PacienteSQL(Paciente paciente) {
+        this.paciente = paciente;
     }
 
-    public Paciente(String nombre1, String nombre2, String apellido1, String apellido2, String tipoDocumento, int numeroDocumento, Date fechaNacimiento, String correo, String telefono, String direccion, String barrio, String seguroMedico, String usuario, String contraseña) {
-        super(nombre1, nombre2, apellido1, apellido2, tipoDocumento, numeroDocumento, fechaNacimiento, correo, telefono, direccion, barrio, usuario, contraseña);
-        this.seguroMedico = seguroMedico;
-    }
-
-    //Registramos a el Paciente en la base de datos 
-    @Override
-    public void registrar() {
-        Connection con = null;
-        PreparedStatement stmt = null;
-        try {
-            con = c.conectar();
-            String query = "INSERT INTO pacientes (nombre_1, nombre_2, apellido_1, apellido_2, tipo_documento, num_documento, fecha_nacimiento, direccion, barrio, seguro_medico, correo_electronico, num_telefono, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            stmt = con.prepareStatement(query);
-            stmt.setString(1, nombre1);
-            stmt.setString(2, nombre2);
-            stmt.setString(3, apellido1);
-            stmt.setString(4, apellido2);
-            stmt.setString(5, tipoDocumento);
-            stmt.setInt(6, numeroDocumento);
-            java.sql.Date fechasql = new java.sql.Date(fechaNacimiento.getTime());
-            stmt.setDate(7, fechasql);
-            stmt.setString(8, direccion);
-            stmt.setString(9, barrio);
-            stmt.setString(10, seguroMedico);
-            stmt.setString(11, correo);
-            stmt.setString(12, telefono);
-            stmt.setString(13, usuario);
-            stmt.setString(14, contraseña);
-            int filasinsertadas = stmt.executeUpdate();
-            if (filasinsertadas > 0) {
-                JOptionPane.showMessageDialog(null, "Datos registrados con exito", "Usuario Registrado", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                System.out.println("Usuario no registrado");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        } finally {
-            // Cerrar recursos en el bloque finally
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
+    public PacienteSQL() {
     }
 
     @Override
@@ -79,21 +30,21 @@ public class Paciente extends Usuario {
             con = c.conectar();
             String query = "UPDATE pacientes SET nombre_1 = ?, nombre_2= ?, apellido_1= ?, apellido_2= ?, tipo_documento= ?, fecha_nacimiento= ?, direccion= ?, barrio= ?, seguro_medico= ?, correo_electronico= ?, num_telefono= ?, usuario= ?, contrasena= ? WHERE num_documento = ?";
             stmt = con.prepareStatement(query);
-            stmt.setString(1, nombre1);
-            stmt.setString(2, nombre2);
-            stmt.setString(3, apellido1);
-            stmt.setString(4, apellido2);
-            stmt.setString(5, tipoDocumento);
-            java.sql.Date fechasql = new java.sql.Date(fechaNacimiento.getTime());
+            stmt.setString(1, paciente.getNombre1());
+            stmt.setString(2, paciente.getNombre2());
+            stmt.setString(3, paciente.getApellido1());
+            stmt.setString(4, paciente.getNombre2());
+            stmt.setString(5, paciente.getTipoDocumento());
+            java.sql.Date fechasql = new java.sql.Date(paciente.getFechaNacimiento().getTime());
             stmt.setDate(6, fechasql);
-            stmt.setString(7, direccion);
-            stmt.setString(8, barrio);
-            stmt.setString(9, seguroMedico);
-            stmt.setString(10, correo);
-            stmt.setString(11, telefono);
-            stmt.setString(12, usuario);
-            stmt.setString(13, contraseña);
-            stmt.setInt(14, numeroDocumento);
+            stmt.setString(7, paciente.getDireccion());
+            stmt.setString(8, paciente.getBarrio());
+            stmt.setString(9, paciente.getSeguroMedico());
+            stmt.setString(10, paciente.getCorreo());
+            stmt.setString(11, paciente.getTelefono());
+            stmt.setString(12, Paciente.getUsuario());
+            stmt.setString(13, paciente.getContraseña());
+            stmt.setInt(14, paciente.getNumeroDocumento());
             int filasinsertadas = stmt.executeUpdate();
             if (filasinsertadas > 0) {
                 JOptionPane.showMessageDialog(null, "Datos actualizados con exito", "Actualizacion de Datos", JOptionPane.INFORMATION_MESSAGE);
@@ -115,10 +66,58 @@ public class Paciente extends Usuario {
                 System.out.println("Error: " + e.getMessage());
             }
         }
+
     }
 
     @Override
-    public Object[][] verCitas(String UsUaRio) {
+    public void registrar() {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = c.conectar();
+            String query = "INSERT INTO pacientes (nombre_1, nombre_2, apellido_1, apellido_2, tipo_documento, num_documento, fecha_nacimiento, direccion, barrio, seguro_medico, correo_electronico, num_telefono, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, paciente.getNombre1());
+            stmt.setString(2, paciente.getNombre2());
+            stmt.setString(3, paciente.getApellido1());
+            stmt.setString(4, paciente.getApellido2());
+            stmt.setString(5, paciente.getTipoDocumento());
+            stmt.setInt(6, paciente.getNumeroDocumento());
+            java.sql.Date fechasql = new java.sql.Date(paciente.getFechaNacimiento().getTime());
+            stmt.setDate(7, fechasql);
+            stmt.setString(8, paciente.getDireccion());
+            stmt.setString(9, paciente.getBarrio());
+            stmt.setString(10, paciente.getSeguroMedico());
+            stmt.setString(11, paciente.getCorreo());
+            stmt.setString(12, paciente.getTelefono());
+            stmt.setString(13, Paciente.getUsuario());
+            stmt.setString(14, paciente.getContraseña());
+            int filasinsertadas = stmt.executeUpdate();
+            if (filasinsertadas > 0) {
+                JOptionPane.showMessageDialog(null, "Datos registrados con exito", "Usuario Registrado", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println("Usuario no registrado");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            // Cerrar recursos en el bloque finally
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+
+    }
+
+    @Override
+    public Object[][] verCitas(String Usuario) {
         List<Object[]> citas = new ArrayList<>();
         Connection con = null;
         PreparedStatement stmt = null;
@@ -132,7 +131,7 @@ public class Paciente extends Usuario {
             con = c.conectar();
             String query1 = "SELECT num_documento FROM pacientes WHERE usuario = ?";
             stmt = con.prepareStatement(query1);
-            stmt.setString(1, UsUaRio);
+            stmt.setString(1, Paciente.getUsuario());
             rta = stmt.executeQuery();
             int numeroDOCUMENTO;
             if (rta.next()) {
@@ -192,7 +191,7 @@ public class Paciente extends Usuario {
         }
         return new Object[0][0];
     }
-
+    
     public Object[][] verMedicos() {
         List<Object[]> medicos = new ArrayList<>();
         Connection con = null;
@@ -234,7 +233,7 @@ public class Paciente extends Usuario {
         }
         return new Object[0][0];
     }
-
+    
     public Object[][] buscarMedicos(String Especialidad) {
         List<Object[]> medicos = new ArrayList<>();
         Connection con = null;

@@ -1,18 +1,15 @@
 package Interfaz.Administrador;
 
-import Logica.Medico;
-import Logica.Usuario;
+import Modelos.Medico;
+import Persistencias.MedicoSQL;
+import Persistencias.Metodos;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
 public class EditarMedico extends javax.swing.JFrame {
-
-    Usuario U = new Medico();
     boolean estado = false;
-    String medico[];
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
     public EditarMedico() {
@@ -22,11 +19,10 @@ public class EditarMedico extends javax.swing.JFrame {
     public EditarMedico(String[] medico) {
         try {
             initComponents();
-            String[] partes = Usuario.descomponerDireccion(medico[7]);
+            String[] partes = Metodos.descomponerDireccion(medico[7]);
             this.setLocationRelativeTo(this);
             this.setResizable(false);
             this.setTitle("Editar Medico");
-            this.medico = medico;
             BTNmostrar.setText("Mostrar");
             JPConfirmarContraseña.setEchoChar('•');
             JPContraseña.setEchoChar('•');
@@ -463,10 +459,12 @@ public class EditarMedico extends javax.swing.JFrame {
                 if (JCBIS.isSelected()) {
                     Bis = "Bis";
                 }
-                String Direccion = CrearCuentaMedico.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
+                String Direccion = Metodos.direccion(CBTipo_Via1.getSelectedItem().toString().trim(), JTNumero_Principal1.getText().trim(), Bis.trim(), CBLetras1.getSelectedItem().toString().trim(), CBOrientacion1.getSelectedItem().toString().trim(), JTNumero1.getText().trim(), CBLetras2.getSelectedItem().toString().trim(), JTNumero2.getText().trim());
                 Date FechaNacimiento = (Date) JSFecha_Nacimiento.getValue();
                 Medico M = new Medico(JTnombre_1.getText(), JTnombre_2.getText(), JTapellido_1.getText(), JTapellido_2.getText(), CBTipo_Documento.getSelectedItem().toString(), Integer.parseInt(JTNumero_Documento.getText()), FechaNacimiento, JTCorreo_Electronico.getText(), JTTelefono.getText(), Direccion, CBBarrio.getSelectedItem().toString(), JTUsuario.getText(), contra, CBEspecialidad.getSelectedItem().toString());
-                M.actualizarDatos();
+                Medico.setUsuario(JTUsuario.getText());
+                MedicoSQL MS = new MedicoSQL(M);
+                MS.actualizarDatos();
                 this.dispose();
                 new VizualizarMedicos().setVisible(true);
             }
@@ -488,28 +486,6 @@ public class EditarMedico extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BTNmostrarActionPerformed
-    public static String direccion(String a, String b, String c, String d, String e, String f, String g, String h) {
-        StringJoiner direccionJ = new StringJoiner(" ");
-        direccionJ.add(a);
-        direccionJ.add(b);
-        if (!c.isEmpty()) {
-            direccionJ.add(c);
-        }
-        if (!d.isEmpty()) {
-            direccionJ.add(d);
-        }
-        if (!e.isEmpty()) {
-            direccionJ.add(e);
-        }
-        direccionJ.add("#");
-        direccionJ.add(f);
-        if (!g.isEmpty()) {
-            direccionJ.add(g);
-        }
-        direccionJ.add("-");
-        direccionJ.add(h);
-        return direccionJ.toString();
-    }
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
