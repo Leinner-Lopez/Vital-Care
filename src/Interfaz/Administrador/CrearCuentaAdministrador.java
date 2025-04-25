@@ -424,6 +424,7 @@ public class CrearCuentaAdministrador extends javax.swing.JFrame {
                     Administrador.setUsuario(JTUsuario.getText());
                     AdministradorSQL AS = new AdministradorSQL(A);
                     AS.registrar();
+                    this.dispose();
                 }
             }
         }else {

@@ -437,6 +437,7 @@ public class CrearCuentaPaciente extends javax.swing.JFrame {
                     Paciente.setUsuario(JTUsuario.getText());
                     PacienteSQL PS = new PacienteSQL(P);
                     PS.registrar();
+                    this.dispose();
                 }
             }
         }

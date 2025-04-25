@@ -439,6 +439,7 @@ public class CrearCuentaMedico extends javax.swing.JFrame {
                     Medico.setUsuario(JTUsuario.getText());
                     MedicoSQL MS = new MedicoSQL(M);
                     MS.registrar();
+                    this.dispose();
                 }
             }
         } else {
