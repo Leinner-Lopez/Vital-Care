@@ -21,7 +21,8 @@ public abstract class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre1, String nombre2, String apellido1, String apellido2, String tipoDocumento, int numeroDocumento, Date fechaNacimiento, String correo, String telefono, String direccion, String barrio, String contraseña) {
+    public Usuario(String nombre1, String nombre2, String apellido1, String apellido2, String tipoDocumento, 
+            int numeroDocumento, Date fechaNacimiento, String correo, String telefono, String direccion, String barrio, String contraseña) {
         this.nombre1 = nombre1;
         this.nombre2 = nombre2;
         this.apellido1 = apellido1;

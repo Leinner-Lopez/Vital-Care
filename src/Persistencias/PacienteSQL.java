@@ -21,14 +21,16 @@ public class PacienteSQL extends UsuarioSQL {
 
     public PacienteSQL() {
     }
-
+    
     @Override
     public void actualizarDatos() {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
             con = c.conectar();
-            String query = "UPDATE pacientes SET nombre_1 = ?, nombre_2= ?, apellido_1= ?, apellido_2= ?, tipo_documento= ?, fecha_nacimiento= ?, direccion= ?, barrio= ?, seguro_medico= ?, correo_electronico= ?, num_telefono= ?, usuario= ?, contrasena= ? WHERE num_documento = ?";
+            String query = "UPDATE pacientes SET nombre_1 = ?, nombre_2= ?, apellido_1= ?, apellido_2= ?, tipo_documento= ?, fecha_nacimiento= ?, "
+                    + "direccion= ?, barrio= ?, seguro_medico= ?, correo_electronico= ?, num_telefono= ?, usuario= ?, contrasena= ? "
+                    + "WHERE num_documento = ?";
             stmt = con.prepareStatement(query);
             stmt.setString(1, paciente.getNombre1());
             stmt.setString(2, paciente.getNombre2());
@@ -75,7 +77,8 @@ public class PacienteSQL extends UsuarioSQL {
         PreparedStatement stmt = null;
         try {
             con = c.conectar();
-            String query = "INSERT INTO pacientes (nombre_1, nombre_2, apellido_1, apellido_2, tipo_documento, num_documento, fecha_nacimiento, direccion, barrio, seguro_medico, correo_electronico, num_telefono, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO pacientes (nombre_1, nombre_2, apellido_1, apellido_2, tipo_documento, num_documento, fecha_nacimiento, direccion, barrio, seguro_medico, "
+                    + "correo_electronico, num_telefono, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(query);
             stmt.setString(1, paciente.getNombre1());
             stmt.setString(2, paciente.getNombre2());
@@ -117,7 +120,7 @@ public class PacienteSQL extends UsuarioSQL {
     }
 
     @Override
-    public Object[][] verCitas(String Usuario) {
+    public Object[][] vizualizarCitas(String Usuario) {
         List<Object[]> citas = new ArrayList<>();
         Connection con = null;
         PreparedStatement stmt = null;

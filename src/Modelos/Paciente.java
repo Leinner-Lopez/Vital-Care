@@ -8,7 +8,8 @@ public class Paciente extends Usuario{
     public Paciente() {
     }
 
-    public Paciente(String nombre1, String nombre2, String apellido1, String apellido2, String tipoDocumento, int numeroDocumento, Date fechaNacimiento, String correo, String telefono, String direccion, String barrio, String seguroMedico, String usuario, String contraseña) {
+    public Paciente(String nombre1, String nombre2, String apellido1, String apellido2, String tipoDocumento, 
+            int numeroDocumento, Date fechaNacimiento, String correo, String telefono, String direccion, String barrio, String seguroMedico, String usuario, String contraseña) {
         super(nombre1, nombre2, apellido1, apellido2, tipoDocumento, numeroDocumento, fechaNacimiento, correo, telefono, direccion, barrio, contraseña);
         this.seguroMedico = seguroMedico;
     }

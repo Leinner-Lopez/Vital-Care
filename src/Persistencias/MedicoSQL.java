@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class MedicoSQL extends UsuarioSQL {
 
     Medico medico;
+    Conexion c = new Conexion();
 
     public MedicoSQL(Medico medico) {
         this.medico = medico;
@@ -29,7 +30,8 @@ public class MedicoSQL extends UsuarioSQL {
         PreparedStatement stmt = null;
         try {
             con = c.conectar();
-            String query = "UPDATE medicos SET nombre_1 = ?, nombre_2 = ?, apellido_1 = ?, apellido_2 = ?, tipo_documento = ?,fecha_nacimiento= ?, direccion= ?, barrio= ?, especialidad= ?, correo_electronico= ?, num_telefono= ?, usuario= ?, contrasena= ? WHERE num_documento = ?";
+            String query = "UPDATE medicos SET nombre_1 = ?, nombre_2 = ?, apellido_1 = ?, apellido_2 = ?, tipo_documento = ?,fecha_nacimiento= ?, direccion= ?, barrio= ?, "
+                    + "especialidad= ?, correo_electronico= ?, num_telefono= ?, usuario= ?, contrasena= ? WHERE num_documento = ?";
             stmt = con.prepareStatement(query);
             stmt.setString(1, medico.getNombre1());
             stmt.setString(2, medico.getNombre2());
@@ -75,7 +77,8 @@ public class MedicoSQL extends UsuarioSQL {
         PreparedStatement stmt = null;
         try {
             con = c.conectar();
-            String query = "INSERT INTO medicos (nombre_1, nombre_2, apellido_1, apellido_2, tipo_documento, num_documento, fecha_nacimiento, direccion, barrio, especialidad, correo_electronico, num_telefono, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO medicos (nombre_1, nombre_2, apellido_1, apellido_2, tipo_documento, num_documento, fecha_nacimiento, direccion, barrio, especialidad, correo_electronico, "
+                    + "num_telefono, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(query);
             stmt.setString(1, medico.getNombre1());
             stmt.setString(2, medico.getNombre2());
@@ -116,7 +119,7 @@ public class MedicoSQL extends UsuarioSQL {
     }
 
     @Override
-    public Object[][] verCitas(String Usuario) {
+    public Object[][] vizualizarCitas(String Usuario) {
         List<Object[]> citas = new ArrayList<>();
         Connection con = null;
         PreparedStatement stmt = null;

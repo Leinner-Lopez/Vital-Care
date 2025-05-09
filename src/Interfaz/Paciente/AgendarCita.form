@@ -101,30 +101,34 @@
               <Font name="Rockwell" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="20">
-                <StringItem index="0" value="Medicina Interna"/>
-                <StringItem index="1" value="Pediatr&#xed;a"/>
-                <StringItem index="2" value="Ginecolog&#xed;a y Obstetricia"/>
-                <StringItem index="3" value="Cirug&#xed;a General"/>
-                <StringItem index="4" value="Anestesiolog&#xed;a"/>
-                <StringItem index="5" value="Cardiolog&#xed;a"/>
-                <StringItem index="6" value="Neurolog&#xed;a"/>
-                <StringItem index="7" value="Traumatolog&#xed;a y Ortopedia"/>
-                <StringItem index="8" value="Dermatolog&#xed;a"/>
-                <StringItem index="9" value="Oftalmolog&#xed;a"/>
-                <StringItem index="10" value="Otorrinolaringolog&#xed;a"/>
-                <StringItem index="11" value="Neumolog&#xed;a"/>
-                <StringItem index="12" value="Urolog&#xed;a"/>
-                <StringItem index="13" value="Endocrinolog&#xed;a"/>
-                <StringItem index="14" value="Gastroenterolog&#xed;a"/>
-                <StringItem index="15" value="Nefrolog&#xed;a"/>
-                <StringItem index="16" value="Psiquiatr&#xed;a"/>
-                <StringItem index="17" value="Oncolog&#xed;a"/>
-                <StringItem index="18" value="Reumatolog&#xed;a"/>
-                <StringItem index="19" value="Radiolog&#xed;a"/>
+              <StringArray count="21">
+                <StringItem index="0" value="Todos"/>
+                <StringItem index="1" value="Medicina Interna"/>
+                <StringItem index="2" value="Pediatr&#xed;a"/>
+                <StringItem index="3" value="Ginecolog&#xed;a y Obstetricia"/>
+                <StringItem index="4" value="Cirug&#xed;a General"/>
+                <StringItem index="5" value="Anestesiolog&#xed;a"/>
+                <StringItem index="6" value="Cardiolog&#xed;a"/>
+                <StringItem index="7" value="Neurolog&#xed;a"/>
+                <StringItem index="8" value="Traumatolog&#xed;a y Ortopedia"/>
+                <StringItem index="9" value="Dermatolog&#xed;a"/>
+                <StringItem index="10" value="Oftalmolog&#xed;a"/>
+                <StringItem index="11" value="Otorrinolaringolog&#xed;a"/>
+                <StringItem index="12" value="Neumolog&#xed;a"/>
+                <StringItem index="13" value="Urolog&#xed;a"/>
+                <StringItem index="14" value="Endocrinolog&#xed;a"/>
+                <StringItem index="15" value="Gastroenterolog&#xed;a"/>
+                <StringItem index="16" value="Nefrolog&#xed;a"/>
+                <StringItem index="17" value="Psiquiatr&#xed;a"/>
+                <StringItem index="18" value="Oncolog&#xed;a"/>
+                <StringItem index="19" value="Reumatolog&#xed;a"/>
+                <StringItem index="20" value="Radiolog&#xed;a"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CBEspecialidadActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

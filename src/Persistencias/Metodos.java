@@ -1,9 +1,6 @@
 package Persistencias;
-
 import java.util.StringJoiner;
-
 public abstract class Metodos {
-
     public static String[] descomponerDireccion(String direccion) {
         // Resultado: [tipoVia, numeroPrincipal, bis, letraPrincipal, orientacion, numeroSecundario, letraSecundaria, numeroFinal]
         String[] partes = new String[8];

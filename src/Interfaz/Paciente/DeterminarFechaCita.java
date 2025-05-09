@@ -1,5 +1,6 @@
 package Interfaz.Paciente;
 
+import Modelos.Medico;
 import Persistencias.CitasSQL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,10 +12,10 @@ public class DeterminarFechaCita extends javax.swing.JFrame {
     CitasSQL c = new CitasSQL();
     int numeroDocumento;
 
-    public DeterminarFechaCita(ArrayList<String> citasDisponibles, String nombre_1, String apellido_1, String especialidad, int numeroDocumento) {
+    public DeterminarFechaCita(ArrayList<String> citasDisponibles, String nombre_1, String apellido_1, String especialidad, Medico medico) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.numeroDocumento = numeroDocumento;
+        this.numeroDocumento = medico.getNumeroDocumento();
         JLnombre.setText(nombre_1);
         JLApellido.setText(apellido_1);
         JLEspecialidad.setText(especialidad);

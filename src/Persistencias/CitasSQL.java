@@ -1,5 +1,6 @@
 package Persistencias;
 
+import Modelos.Medico;
 import Modelos.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,11 +17,11 @@ public class CitasSQL {
 
     Conexion c = new Conexion();
 
-    public int determinarNumeroDocumentoMedico(String nombre_1, String apellido_1, String especialidad) {
+    public Medico determinarNumeroDocumentoMedico(String nombre_1, String apellido_1, String especialidad) {
+        Medico medico = new Medico();
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rta = null;
-        int documento = 0;
         try {
             con = c.conectar();
             String query = "SELECT num_documento FROM medicos WHERE nombre_1=? AND apellido_1 = ? AND especialidad = ?";
@@ -30,8 +31,7 @@ public class CitasSQL {
             stmt.setString(3, especialidad);
             rta = stmt.executeQuery();
             if (rta.next()) {
-                documento = rta.getInt("num_documento");
-            }
+                medico.setNumeroDocumento(rta.getInt("num_documento"));            }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
@@ -49,10 +49,10 @@ public class CitasSQL {
                 System.out.println("Error: " + e.getMessage());
             }
         }
-        return documento;
+        return medico;
     }
 
-    public ArrayList<String> obtenerCitasTomadas(Timestamp inicioDisponibilidad, Timestamp finDisponibilidad, int numeroDocumento) {
+    public ArrayList<String> obtenerCitasTomadas(Timestamp inicioDisponibilidad, Timestamp finDisponibilidad, Medico medico) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rta = null;
@@ -61,7 +61,7 @@ public class CitasSQL {
             con = c.conectar();
             String query = "SELECT fecha_hora FROM citas WHERE documento_medico = ?";
             stmt = con.prepareStatement(query);
-            stmt.setInt(1, numeroDocumento);
+            stmt.setInt(1, medico.getNumeroDocumento());
             rta = stmt.executeQuery();
             ArrayList<LocalDateTime> citasTomadas = new ArrayList<>();
             while (rta.next()) {

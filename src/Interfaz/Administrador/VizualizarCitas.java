@@ -7,7 +7,7 @@ public class VizualizarCitas extends javax.swing.JFrame {
     public VizualizarCitas() {
         initComponents();
         this.setLocationRelativeTo(null);
-        DefaultTableModel tabla = new DefaultTableModel(A.verCitas(Usuario.getUsuario()), new String[]{"NUMERO DOCUMENTO", "NOMBRE MEDICO", "ESPECIALIDAD", "FECHA CITA"});
+        DefaultTableModel tabla = new DefaultTableModel(A.vizualizarCitas(Usuario.getUsuario()), new String[]{"NUMERO DOCUMENTO", "NOMBRE MEDICO", "ESPECIALIDAD", "FECHA CITA"});
         JTCitas.setModel(tabla);
     }
     @SuppressWarnings("unchecked")

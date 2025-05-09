@@ -1,4 +1,4 @@
-    package Modelos;
+package Modelos;
 
 import java.util.Date;
 
@@ -7,7 +7,8 @@ public class Administrador extends Usuario{
     public Administrador() {
     }
 
-    public Administrador(String nombre1, String nombre2, String apellido1, String apellido2, String tipoDocumento, int numeroDocumento, Date fechaNacimiento, String correo, String telefono, String direccion, String barrio, String usuario, String contraseña) {
+    public Administrador(String nombre1, String nombre2, String apellido1, String apellido2, String tipoDocumento, int numeroDocumento, 
+            Date fechaNacimiento, String correo, String telefono, String direccion, String barrio, String usuario, String contraseña) {
         super(nombre1, nombre2, apellido1, apellido2, tipoDocumento, numeroDocumento, fechaNacimiento, correo, telefono, direccion, barrio, contraseña);
     }
 

@@ -9,7 +9,7 @@ public class VerCitas extends javax.swing.JFrame {
     public VerCitas() {
         initComponents();
         this.setLocationRelativeTo(null);
-        DefaultTableModel tabla = new DefaultTableModel(P.verCitas(Usuario.getUsuario()), new String[]{"NUMERO DOCUMENTO", "NOMBRE PACIENTE", "SEGURO MEDICO", "FECHA CITA"});
+        DefaultTableModel tabla = new DefaultTableModel(P.vizualizarCitas(Usuario.getUsuario()), new String[]{"NUMERO DOCUMENTO", "NOMBRE PACIENTE", "SEGURO MEDICO", "FECHA CITA"});
         JTCitas.setModel(tabla);
     }
 

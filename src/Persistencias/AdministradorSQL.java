@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-
+    
 public class AdministradorSQL extends UsuarioSQL {
     private Conexion c = new Conexion();
     private Administrador admin;
@@ -28,7 +28,8 @@ public class AdministradorSQL extends UsuarioSQL {
         PreparedStatement stmt = null;
         try {
             con = c.conectar();
-            String query = "INSERT INTO administradores (nombre_1, nombre_2, apellido_1, apellido_2, tipo_documento, num_documento, fecha_nacimiento, direccion, barrio, correo_electronico, num_telefono, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO administradores (nombre_1, nombre_2, apellido_1, apellido_2, tipo_documento, num_documento, fecha_nacimiento, direccion, barrio, "
+                    + "correo_electronico, num_telefono, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(query);
             stmt.setString(1, admin.getNombre1());
             stmt.setString(2, admin.getNombre2());
@@ -73,7 +74,8 @@ public class AdministradorSQL extends UsuarioSQL {
         PreparedStatement stmt = null;
         try {
             con = c.conectar();
-            String query = "UPDATE administradores SET nombre_1 = ?, nombre_2 = ?, apellido_1 = ?, apellido_2 = ?, tipo_documento = ?, fecha_nacimiento = ?, direccion = ?, barrio = ?, correo_electronico = ?, num_telefono = ?, usuario = ?, contrasena = ? WHERE num_documento = ?";
+            String query = "UPDATE administradores SET nombre_1 = ?, nombre_2 = ?, apellido_1 = ?, apellido_2 = ?, tipo_documento = ?, fecha_nacimiento = ?, direccion = ?, "
+                    + "barrio = ?, correo_electronico = ?, num_telefono = ?, usuario = ?, contrasena = ? WHERE num_documento = ?";
             stmt = con.prepareStatement(query);
             stmt.setString(1, admin.getNombre1());
             stmt.setString(2, admin.getNombre2());
@@ -113,7 +115,7 @@ public class AdministradorSQL extends UsuarioSQL {
     }
 
     @Override
-    public Object[][] verCitas(String Usuario) {
+    public Object[][] vizualizarCitas(String Usuario) {
         List<Object[]> citas = new ArrayList<>();
         Connection con = null;
         PreparedStatement stmtCitas = null;
@@ -152,7 +154,6 @@ public class AdministradorSQL extends UsuarioSQL {
 
                 citas.add(datos);
             }
-
             return citas.toArray(new Object[citas.size()][4]);
 
         } catch (SQLException e) {

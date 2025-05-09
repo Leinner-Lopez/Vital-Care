@@ -1,5 +1,4 @@
 package Persistencias;
-
 import Modelos.Administrador;
 import Modelos.Medico;
 import Modelos.Paciente;
@@ -17,7 +16,7 @@ public abstract class UsuarioSQL {
 
     public abstract void registrar();
 
-    public abstract Object[][] verCitas(String Usuario);
+    public abstract Object[][] vizualizarCitas(String Usuario);
 
     public String verificarDatos(String Usuario, String Contraseña) {
         String[] tablas = {"pacientes", "medicos", "administradores"};

@@ -1,4 +1,6 @@
 package Interfaz.Paciente;
+
+import Modelos.Medico;
 import Persistencias.CitasSQL;
 import Persistencias.PacienteSQL;
 import javax.swing.JOptionPane;
@@ -7,14 +9,18 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class AgendarCita extends javax.swing.JFrame {
+
     PacienteSQL P = new PacienteSQL();
-    CitasSQL c =  new CitasSQL();
+    CitasSQL c = new CitasSQL();
+    Medico medico = new Medico();
+
     public AgendarCita() {
         initComponents();
         this.setLocationRelativeTo(null);
-        DefaultTableModel tabla = new DefaultTableModel(P.verMedicos(),new String[] {"NOMBRE","APELLIDO","Especialidad","Inicio Disponibilidad","Fin Disponibilidad"});
+        DefaultTableModel tabla = new DefaultTableModel(P.verMedicos(), new String[]{"NOMBRE", "APELLIDO", "Especialidad", "Inicio Disponibilidad", "Fin Disponibilidad"});
         JTMedicos.setModel(tabla);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,7 +49,12 @@ public class AgendarCita extends javax.swing.JFrame {
         jScrollPane1.setViewportView(JTMedicos);
 
         CBEspecialidad.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        CBEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medicina Interna", "Pediatría", "Ginecología y Obstetricia", "Cirugía General", "Anestesiología", "Cardiología", "Neurología", "Traumatología y Ortopedia", "Dermatología", "Oftalmología", "Otorrinolaringología", "Neumología", "Urología", "Endocrinología", "Gastroenterología", "Nefrología", "Psiquiatría", "Oncología", "Reumatología", "Radiología" }));
+        CBEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Medicina Interna", "Pediatría", "Ginecología y Obstetricia", "Cirugía General", "Anestesiología", "Cardiología", "Neurología", "Traumatología y Ortopedia", "Dermatología", "Oftalmología", "Otorrinolaringología", "Neumología", "Urología", "Endocrinología", "Gastroenterología", "Nefrología", "Psiquiatría", "Oncología", "Reumatología", "Radiología" }));
+        CBEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBEspecialidadActionPerformed(evt);
+            }
+        });
 
         BTNBuscar.setText("Buscar");
         BTNBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,31 +116,40 @@ public class AgendarCita extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNBuscarActionPerformed
-        DefaultTableModel tabla = new DefaultTableModel(P.buscarMedicos(CBEspecialidad.getSelectedItem().toString()),new String[] {"NOMBRE","APELLIDO","Especialidad","Inicio Disponibilidad","Fin Disponibilidad"});
-        JTMedicos.setModel(tabla);
+        if (!"Todos".equals(CBEspecialidad.getSelectedItem().toString())) {
+            DefaultTableModel tabla = new DefaultTableModel(P.buscarMedicos(CBEspecialidad.getSelectedItem().toString()), new String[]{"NOMBRE", "APELLIDO", "Especialidad", "Inicio Disponibilidad", "Fin Disponibilidad"});
+            JTMedicos.setModel(tabla);
+        } else {
+            DefaultTableModel tabla = new DefaultTableModel(P.verMedicos(), new String[]{"NOMBRE", "APELLIDO", "Especialidad", "Inicio Disponibilidad", "Fin Disponibilidad"});
+            JTMedicos.setModel(tabla);
+        }
     }//GEN-LAST:event_BTNBuscarActionPerformed
 
     private void BTNAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAgendarActionPerformed
         int Fila = JTMedicos.getSelectedRow();
-        if(Fila == -1){
+        if (Fila == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un medico para agendar la cita medica");
-        }else{
-            String FechaFin = JTMedicos.getValueAt(Fila,4).toString();
+        } else {
+            String FechaFin = JTMedicos.getValueAt(Fila, 4).toString();
             String FechaInicio = JTMedicos.getValueAt(Fila, 3).toString();
             Timestamp disponibilidadFinal = Timestamp.valueOf(FechaFin);
             Timestamp disponibilidadInicial = Timestamp.valueOf(FechaInicio);
             Timestamp ahora = new Timestamp(System.currentTimeMillis());
-            if(disponibilidadFinal.after(ahora) ){
+            if (disponibilidadFinal.after(ahora)) {
                 ArrayList<String> citasDisponibles;
-                int numeroDocumento = c.determinarNumeroDocumentoMedico(JTMedicos.getValueAt(Fila, 0).toString(),JTMedicos.getValueAt(Fila, 1).toString(), JTMedicos.getValueAt(Fila, 2).toString());
-                citasDisponibles = c.obtenerCitasTomadas(disponibilidadInicial, disponibilidadFinal, numeroDocumento);
-                new DeterminarFechaCita(citasDisponibles, JTMedicos.getValueAt(Fila, 0).toString(),JTMedicos.getValueAt(Fila, 1).toString(), JTMedicos.getValueAt(Fila, 2).toString(),numeroDocumento).setVisible(true);
+                medico = c.determinarNumeroDocumentoMedico(JTMedicos.getValueAt(Fila, 0).toString(), JTMedicos.getValueAt(Fila, 1).toString(), JTMedicos.getValueAt(Fila, 2).toString());
+                citasDisponibles = c.obtenerCitasTomadas(disponibilidadInicial, disponibilidadFinal, medico);
+                new DeterminarFechaCita(citasDisponibles, JTMedicos.getValueAt(Fila, 0).toString(), JTMedicos.getValueAt(Fila, 1).toString(), JTMedicos.getValueAt(Fila, 2).toString(), medico).setVisible(true);
                 this.dispose();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "La disponibilidad del Medico a vencido", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_BTNAgendarActionPerformed
+
+    private void CBEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBEspecialidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBEspecialidadActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
